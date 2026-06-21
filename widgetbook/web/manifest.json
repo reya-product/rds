@@ -1,0 +1,12 @@
+{
+  "name": "RDS — Reya Design System",
+  "short_name": "RDS",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2A9090",
+  "description": "Reya Design System — component catalog",
+  "orientation": "any",
+  "prefer_related_applications": false,
+  "icons": []
+}

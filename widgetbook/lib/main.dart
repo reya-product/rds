@@ -1,0 +1,393 @@
+import 'package:flutter/material.dart';
+import 'package:rds/rds.dart';
+import 'package:widgetbook/widgetbook.dart';
+
+// ---------------------------------------------------------------------------
+// T1 Atoms — wired 2026-06-22
+// ---------------------------------------------------------------------------
+import 'usecases/button.usecases.dart';
+import 'usecases/button_group.usecases.dart';
+import 'usecases/segmented_buttons.usecases.dart';
+import 'usecases/badge.usecases.dart';
+import 'usecases/avatar.usecases.dart';
+import 'usecases/tooltip.usecases.dart';
+import 'usecases/input_chip.usecases.dart';
+import 'usecases/checkbox.usecases.dart';
+import 'usecases/radio.usecases.dart';
+import 'usecases/toggle_switch.usecases.dart';
+import 'usecases/toast.usecases.dart';
+import 'usecases/tabs.usecases.dart';
+import 'usecases/vertical_tabs.usecases.dart';
+import 'usecases/date_picker.usecases.dart';
+import 'usecases/text_field.usecases.dart';
+
+void main() => runApp(const RdsWidgetbook());
+
+class RdsWidgetbook extends StatelessWidget {
+  const RdsWidgetbook({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Widgetbook.material(
+      // ignore: avoid_redundant_argument_values
+      directories: [
+        WidgetbookFolder(
+          name: 'Foundation',
+          children: [
+            WidgetbookComponent(
+              name: 'Color palette',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Semantic roles — light',
+                  builder: (context) => const _ColorPalettePreview(),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'Type scale',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'All styles',
+                  builder: (context) => const _TypeScalePreview(),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'Spacing',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Scale',
+                  builder: (context) => const _SpacingPreview(),
+                ),
+              ],
+            ),
+          ],
+        ),
+        WidgetbookFolder(
+          name: 'T1 Atoms',
+          children: [
+            WidgetbookFolder(
+              name: 'Buttons',
+              children: [
+                buttonComponent,
+                buttonGroupComponent,
+                segmentedButtonsComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Display',
+              children: [
+                badgeComponent,
+                avatarComponent,
+                tooltipComponent,
+                inputChipComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Controls',
+              children: [
+                checkboxComponent,
+                radioComponent,
+                toggleSwitchComponent,
+                toastComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Navigation',
+              children: [
+                tabsComponent,
+                verticalTabsComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Date & Time',
+              children: [
+                datePickerComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Fields',
+              children: [
+                textFieldComponent,
+                textAreaComponent,
+                passwordFieldComponent,
+                searchBarComponent,
+              ],
+            ),
+          ],
+        ),
+        // T2a Molecules — added by Wiring pass
+        // T2b List-based — added by Wiring pass
+        // T3 Organisms — added by Wiring pass
+      ],
+      addons: [
+        ThemeAddon(
+          themes: [
+            WidgetbookTheme(
+              name: 'Light',
+              data: rdsThemeData(
+                brightness: Brightness.light,
+                rdsTheme: RdsThemes.light,
+              ),
+            ),
+            WidgetbookTheme(
+              name: 'Dark',
+              data: rdsThemeData(
+                brightness: Brightness.dark,
+                rdsTheme: RdsThemes.dark,
+              ),
+            ),
+          ],
+          themeBuilder: (context, theme, child) {
+            return Theme(data: theme, child: child);
+          },
+        ),
+        TextScaleAddon(
+          scales: [1.0, 1.15, 1.3],
+        ),
+        LocalizationAddon(
+          locales: const [Locale('en')],
+          localizationsDelegates: const [],
+        ),
+        GridAddon(),
+        AlignmentAddon(),
+      ],
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Foundation preview widgets
+// ---------------------------------------------------------------------------
+
+class _ColorPalettePreview extends StatelessWidget {
+  const _ColorPalettePreview();
+
+  @override
+  Widget build(BuildContext context) {
+    final rds = Theme.of(context).extension<RdsTheme>()!;
+
+    final roles = <(String, Color, Color)>[
+      ('surface', rds.surface, rds.onSurface),
+      ('surface-variant', rds.surfaceVariant, rds.onSurface),
+      ('surface-container', rds.surfaceContainer, rds.onSurface),
+      ('primary', rds.primary, rds.onPrimary),
+      ('primary-container', rds.primaryContainer, rds.onPrimaryContainer),
+      ('danger', rds.danger, rds.onDanger),
+      ('danger-container', rds.dangerContainer, rds.onDangerContainer),
+      ('warning', rds.warning, rds.onWarning),
+      ('warning-container', rds.warningContainer, rds.onWarningContainer),
+      ('success', rds.success, rds.onSuccess),
+      ('success-container', rds.successContainer, rds.onSuccessContainer),
+      ('neutral', rds.neutral, Colors.white),
+      ('neutral-container', rds.neutralContainer, rds.onNeutralContainer),
+      ('outline', rds.outline, rds.onSurface),
+      ('outline-variant', rds.outlineVariant, rds.onSurface),
+    ];
+
+    return Scaffold(
+      backgroundColor: rds.surfaceVariant,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(rds.space6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Semantic Color Roles',
+              style: rds.headlineMedium.copyWith(color: rds.onSurface),
+            ),
+            SizedBox(height: rds.space2),
+            Text(
+              'All components read these semantic roles — never raw hex values.',
+              style: rds.bodyMedium.copyWith(color: rds.onSurfaceVariant),
+            ),
+            SizedBox(height: rds.space6),
+            Wrap(
+              spacing: rds.space3,
+              runSpacing: rds.space3,
+              children: roles
+                  .map((r) => _ColorChip(name: r.$1, background: r.$2, text: r.$3))
+                  .toList(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ColorChip extends StatelessWidget {
+  final String name;
+  final Color background;
+  final Color text;
+
+  const _ColorChip({
+    required this.name,
+    required this.background,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final rds = Theme.of(context).extension<RdsTheme>()!;
+    return Container(
+      width: 148,
+      height: 76,
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(rds.radiusMd),
+        border: Border.all(color: Colors.black12),
+      ),
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: rds.space2),
+      child: Text(
+        name,
+        style: TextStyle(
+          color: text,
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Inter',
+        ),
+        textAlign: TextAlign.center,
+        maxLines: 2,
+      ),
+    );
+  }
+}
+
+class _TypeScalePreview extends StatelessWidget {
+  const _TypeScalePreview();
+
+  @override
+  Widget build(BuildContext context) {
+    final rds = Theme.of(context).extension<RdsTheme>()!;
+
+    final styles = <(String, TextStyle)>[
+      ('display-large', rds.displayLarge),
+      ('display-medium', rds.displayMedium),
+      ('display-small', rds.displaySmall),
+      ('headline-large', rds.headlineLarge),
+      ('headline-medium', rds.headlineMedium),
+      ('headline-small', rds.headlineSmall),
+      ('title-large', rds.titleLarge),
+      ('title-medium', rds.titleMedium),
+      ('title-small', rds.titleSmall),
+      ('body-large', rds.bodyLarge),
+      ('body-medium', rds.bodyMedium),
+      ('body-small', rds.bodySmall),
+      ('label-large', rds.labelLarge),
+      ('label-medium', rds.labelMedium),
+      ('label-small', rds.labelSmall),
+    ];
+
+    return Scaffold(
+      backgroundColor: rds.surface,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(rds.space6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: styles.map((entry) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: rds.space4),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 180,
+                    child: Text(
+                      entry.$1,
+                      style: rds.bodySmall.copyWith(
+                        color: rds.onSurfaceMuted,
+                        fontFamily: 'monospace',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      'The quick brown fox',
+                      style: entry.$2.copyWith(color: rds.onSurface),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
+
+class _SpacingPreview extends StatelessWidget {
+  const _SpacingPreview();
+
+  @override
+  Widget build(BuildContext context) {
+    final rds = Theme.of(context).extension<RdsTheme>()!;
+
+    final tokens = <(String, double)>[
+      ('space-0', rds.space0),
+      ('space-1 · 4px', rds.space1),
+      ('space-2 · 8px', rds.space2),
+      ('space-3 · 12px', rds.space3),
+      ('space-4 · 16px', rds.space4),
+      ('space-5 · 20px', rds.space5),
+      ('space-6 · 24px', rds.space6),
+      ('space-8 · 32px', rds.space8),
+      ('space-10 · 40px', rds.space10),
+      ('space-12 · 48px', rds.space12),
+      ('space-16 · 64px', rds.space16),
+    ];
+
+    return Scaffold(
+      backgroundColor: rds.surface,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(rds.space6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Spacing Scale',
+              style: rds.headlineMedium.copyWith(color: rds.onSurface),
+            ),
+            SizedBox(height: rds.space2),
+            Text(
+              'Base unit: 4px. All values are multiples of 4.',
+              style: rds.bodyMedium.copyWith(color: rds.onSurfaceVariant),
+            ),
+            SizedBox(height: rds.space6),
+            ...tokens.map((t) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: rds.space3),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 140,
+                      child: Text(
+                        t.$1,
+                        style: rds.bodySmall.copyWith(
+                          color: rds.onSurfaceMuted,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: t.$2.clamp(2.0, 200.0),
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: rds.primaryContainer,
+                        borderRadius: BorderRadius.circular(rds.radiusXs),
+                        border: Border.all(color: rds.primary.withOpacity(0.4)),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+}
