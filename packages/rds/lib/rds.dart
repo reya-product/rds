@@ -86,8 +86,16 @@ export 'components/field_uploader/rds_field_uploader.dart';
 export 'components/field_uploader/rds_uploaded_file.dart';
 
 // ---------------------------------------------------------------------------
-// Components — T2b List-based (added by Wiring pass)
+// Components — T2b List-based (wired 2026-06-22)
 // ---------------------------------------------------------------------------
+
+export 'components/dropdown_popup/rds_dropdown_popup.dart';
+export 'components/dropdown_popup/rds_dropdown_item.dart';
+export 'components/list/rds_list.dart';
+export 'components/list_inputs/rds_list_input_item.dart';
+export 'components/list_inputs/rds_multi_select_list_input.dart';
+export 'components/list_inputs/rds_single_select_list_input.dart';
+export 'components/list_inputs/rds_toggle_list_input.dart';
 
 // ---------------------------------------------------------------------------
 // Components — T3 Organisms (added by Wiring pass)

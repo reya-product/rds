@@ -3,6 +3,11 @@ import 'package:rds/rds.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 // ---------------------------------------------------------------------------
+// T2b List-based — wired 2026-06-22
+import 'usecases/dropdown_popup.usecases.dart';
+import 'usecases/list.usecases.dart';
+import 'usecases/list_inputs.usecases.dart';
+
 // T2a Molecules — wired 2026-06-22
 import 'usecases/segmented_control_input.usecases.dart';
 import 'usecases/checkbox_input.usecases.dart';
@@ -147,8 +152,26 @@ class RdsWidgetbook extends StatelessWidget {
             ),
           ],
         ),
-        // T2b List-based — added by Wiring pass
-        // T2b List-based — added by Wiring pass
+        WidgetbookFolder(
+          name: 'T2b List-based',
+          children: [
+            WidgetbookFolder(
+              name: 'Popups & lists',
+              children: [
+                dropdownPopupComponent,
+                listComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'List inputs',
+              children: [
+                multiSelectListInputComponent,
+                singleSelectListInputComponent,
+                toggleListInputComponent,
+              ],
+            ),
+          ],
+        ),
         // T3 Organisms — added by Wiring pass
       ],
       addons: [
