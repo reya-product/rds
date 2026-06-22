@@ -3,6 +3,9 @@ name: Deploy Widgetbook to GitHub Pages
 on:
   push:
     branches: [main]
+    paths:
+      - 'widgetbook/**'
+      - 'packages/rds/**'
   workflow_dispatch: # allow manual trigger from GitHub UI
 
 permissions:
