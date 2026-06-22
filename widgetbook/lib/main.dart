@@ -46,9 +46,19 @@ void main() => runApp(const RdsWidgetbook());
 class RdsWidgetbook extends StatelessWidget {
   const RdsWidgetbook({super.key});
 
+  // Provide the light RDS theme at the app root so use-case builders always
+  // have a non-null RdsTheme extension even before ThemeAddon applies its
+  // selection (Widgetbook 3.8+ changed when addons wrap the canvas context).
+  static final _defaultTheme = rdsThemeData(
+    brightness: Brightness.light,
+    rdsTheme: RdsThemes.light,
+  );
+
   @override
   Widget build(BuildContext context) {
-    return Widgetbook.material(
+    return Theme(
+      data: _defaultTheme,
+      child: Widgetbook.material(
       // ignore: avoid_redundant_argument_values
       directories: [
         WidgetbookFolder(
@@ -242,6 +252,7 @@ class RdsWidgetbook extends StatelessWidget {
         GridAddon(),
         AlignmentAddon(),
       ],
+      ),
     );
   }
 }
