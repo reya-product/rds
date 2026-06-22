@@ -81,7 +81,7 @@ class _RdsDateFieldState extends State<RdsDateField> {
 
     final result = await showDialog<DateTime>(
       context: context,
-      builder: (_) => _RdsPickerDialog<DateTime>(
+      builder: (_) => RdsPickerDialog<DateTime>(
         title: 'Select date',
         initialValue: widget.value,
         pickerBuilder: (ctx, val, onChange) => RdsDatePicker(

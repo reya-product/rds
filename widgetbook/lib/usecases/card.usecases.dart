@@ -218,43 +218,44 @@ Widget _metricCard(BuildContext context) {
 
   return Scaffold(
     backgroundColor: rds.surfaceVariant,
-    body: Center(
+    body: Padding(
       padding: EdgeInsets.all(rds.space6),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 280),
-        child: RdsCard(
-          elevation: RdsCardElevation.low,
-          outlined: true,
-          // No header — metric displayed in body
-          bodyContent: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '98.4°F',
-                style: rds.displaySmall.copyWith(color: rds.onSurface),
-              ),
-              SizedBox(height: rds.space1),
-              Text(
-                'Body Temperature',
-                style: rds.bodySmall.copyWith(color: rds.onSurfaceVariant),
-              ),
-              SizedBox(height: rds.space3),
-              RdsBadge(
-                label: 'Normal',
-                color: RdsBadgeColor.success,
-                size: RdsBadgeSize.medium,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 280),
+          child: RdsCard(
+            elevation: RdsCardElevation.low,
+            outlined: true,
+            bodyContent: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  '98.4°F',
+                  style: rds.displaySmall.copyWith(color: rds.onSurface),
+                ),
+                SizedBox(height: rds.space1),
+                Text(
+                  'Body Temperature',
+                  style: rds.bodySmall.copyWith(color: rds.onSurfaceVariant),
+                ),
+                SizedBox(height: rds.space3),
+                RdsBadge(
+                  label: 'Normal',
+                  color: RdsBadgeColor.success,
+                  size: RdsBadgeSize.medium,
+                ),
+              ],
+            ),
+            footerActions: [
+              RdsCardAction(
+                label: 'View history',
+                icon: RdsIcons.arrowDown,
+                variant: RdsButtonVariant.text,
+                onPressed: () {},
               ),
             ],
           ),
-          footerActions: [
-            RdsCardAction(
-              label: 'View history',
-              icon: RdsIcons.arrowDown,
-              variant: RdsButtonVariant.text,
-              onPressed: () {},
-            ),
-          ],
         ),
       ),
     ),

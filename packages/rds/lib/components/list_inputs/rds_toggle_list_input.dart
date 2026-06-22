@@ -111,7 +111,7 @@ class RdsToggleListInput<T> extends StatelessWidget {
       }
     }
 
-    return _ListInputWrapper(
+    return ListInputWrapper(
       label: label,
       mandatory: mandatory,
       supportText: supportText,

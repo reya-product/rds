@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/rds_theme.dart';
+import '../../tokens/rds_icon_size.dart';
 import '../../tokens/rds_icons.dart';
 import '../button/rds_button.dart';
 
@@ -121,12 +122,12 @@ class _RdsPickerFieldBaseState extends State<RdsPickerFieldBase> {
               prefixIcon: Icon(
                 widget.leadingIcon,
                 color: rds.onSurfaceVariant,
-                size: rds.iconMd,
+                size: RdsIconSize.md,
               ),
               suffixIcon: Icon(
                 RdsIcons.chevronDown,
                 color: rds.onSurfaceVariant,
-                size: rds.iconMd,
+                size: RdsIconSize.md,
               ),
               filled: true,
               fillColor: widget.readOnly
@@ -159,15 +160,15 @@ class _RdsPickerFieldBaseState extends State<RdsPickerFieldBase> {
 }
 
 // ---------------------------------------------------------------------------
-// _RdsPickerDialog
+// RdsPickerDialog
 // ---------------------------------------------------------------------------
 
 /// Generic dialog shell used by the date/time field components.
 ///
 /// Shows [pickerBuilder]'s widget in a constrained dialog with Cancel and
 /// Confirm buttons.  On confirm, pops with the current picker value.
-class _RdsPickerDialog<T> extends StatefulWidget {
-  const _RdsPickerDialog({
+class RdsPickerDialog<T> extends StatefulWidget {
+  const RdsPickerDialog({
     super.key,
     required this.title,
     required this.pickerBuilder,
@@ -183,10 +184,10 @@ class _RdsPickerDialog<T> extends StatefulWidget {
   ) pickerBuilder;
 
   @override
-  State<_RdsPickerDialog<T>> createState() => _RdsPickerDialogState<T>();
+  State<RdsPickerDialog<T>> createState() => RdsPickerDialogState<T>();
 }
 
-class _RdsPickerDialogState<T> extends State<_RdsPickerDialog<T>> {
+class RdsPickerDialogState<T> extends State<RdsPickerDialog<T>> {
   late T? _current;
 
   @override

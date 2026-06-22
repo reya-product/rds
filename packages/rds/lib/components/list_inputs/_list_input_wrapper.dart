@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../theme/rds_theme.dart';
 
 // ---------------------------------------------------------------------------
-// _ListInputWrapper (private)
+// ListInputWrapper (private)
 // ---------------------------------------------------------------------------
 
 /// Shared shell for all three list input variants.
@@ -13,7 +13,7 @@ import '../../theme/rds_theme.dart';
 ///   2. Optional border container wrapping [child]
 ///   3. [child] — the list of [RdsListItem] rows
 ///   4. Support or error text below the list
-class _ListInputWrapper extends StatelessWidget {
+class ListInputWrapper extends StatelessWidget {
   /// Field label rendered above the list.
   final String label;
 
@@ -33,7 +33,7 @@ class _ListInputWrapper extends StatelessWidget {
   /// The list of rows to render.
   final Widget child;
 
-  const _ListInputWrapper({
+  const ListInputWrapper({
     required this.label,
     required this.mandatory,
     required this.bordered,

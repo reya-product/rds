@@ -85,7 +85,7 @@ class _RdsTimeFieldState extends State<RdsTimeField> {
 
     final result = await showDialog<TimeOfDay>(
       context: context,
-      builder: (_) => _RdsPickerDialog<TimeOfDay>(
+      builder: (_) => RdsPickerDialog<TimeOfDay>(
         title: 'Select time',
         initialValue: widget.value,
         pickerBuilder: (ctx, val, onChange) => RdsTimePicker(

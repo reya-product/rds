@@ -149,17 +149,16 @@ class RdsTooltip extends StatelessWidget {
       waitDuration: waitDuration,
       showDuration: showDuration,
       padding: EdgeInsets.symmetric(
-        horizontal: rds.space3, // 12px
-        vertical: rds.space2,   // 8px
+        horizontal: rds.space3,
+        vertical: rds.space2,
       ),
       margin: EdgeInsets.symmetric(horizontal: rds.space2),
-      constraints: const BoxConstraints(
-        minWidth: 32,
-        maxWidth: 240,
-      ),
       decoration: tooltipDecoration,
       textStyle: rds.bodySmall.copyWith(color: tooltipForeground),
-      child: child,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 32, maxWidth: 240),
+        child: child,
+      ),
     );
   }
 }
