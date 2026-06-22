@@ -7,6 +7,9 @@ import 'package:widgetbook/widgetbook.dart';
 import 'usecases/segmented_control_input.usecases.dart';
 import 'usecases/checkbox_input.usecases.dart';
 import 'usecases/date_field.usecases.dart';
+import 'usecases/list_item.usecases.dart';
+import 'usecases/field_group.usecases.dart';
+import 'usecases/field_uploader.usecases.dart';
 
 // T1 Atoms — wired 2026-06-22
 // ---------------------------------------------------------------------------
@@ -132,6 +135,14 @@ class RdsWidgetbook extends StatelessWidget {
                 dateFieldComponent,
                 timeFieldComponent,
                 dateTimeFieldComponent,
+                fieldGroupComponent,
+                fieldUploaderComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'List',
+              children: [
+                listItemComponent,
               ],
             ),
           ],

@@ -79,6 +79,11 @@ export 'components/checkbox_input/rds_checkbox_input.dart';
 export 'components/date_field/rds_date_field.dart';
 export 'components/date_field/rds_time_field.dart';
 export 'components/date_field/rds_date_time_field.dart';
+export 'components/list_item/rds_list_item.dart';
+export 'components/list_item/rds_list_item_config.dart';
+export 'components/field_group/rds_field_group.dart';
+export 'components/field_uploader/rds_field_uploader.dart';
+export 'components/field_uploader/rds_uploaded_file.dart';
 
 // ---------------------------------------------------------------------------
 // Components — T2b List-based (added by Wiring pass)
