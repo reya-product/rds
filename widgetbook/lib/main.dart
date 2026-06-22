@@ -7,6 +7,7 @@ import 'package:widgetbook/widgetbook.dart';
 import 'usecases/card.usecases.dart';
 import 'usecases/dropdown_field.usecases.dart';
 import 'usecases/combobox_field.usecases.dart';
+import 'usecases/compact_table.usecases.dart';
 
 // T2b List-based — wired 2026-06-22
 import 'usecases/dropdown_popup.usecases.dart';
@@ -184,6 +185,12 @@ class RdsWidgetbook extends StatelessWidget {
               name: 'Content',
               children: [
                 cardComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Data',
+              children: [
+                compactTableComponent,
               ],
             ),
             WidgetbookFolder(

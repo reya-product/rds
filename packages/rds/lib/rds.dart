@@ -105,3 +105,4 @@ export 'components/card/rds_card.dart';
 export 'components/card/rds_card_action.dart';
 export 'components/dropdown_field/rds_dropdown_field.dart';
 export 'components/combobox_field/rds_combobox_field.dart';
+export 'components/table/rds_compact_table.dart';
