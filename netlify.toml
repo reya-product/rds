@@ -1,7 +1,7 @@
 [build]
-  base    = "prototypes"
-  command = "flutter build web --release --no-tree-shake-icons"
-  publish = "build/web"
+  # Builds are handled by GitHub Actions (.github/workflows/deploy-prototypes.yml).
+  # This tells Netlify to skip its own build step.
+  ignore = "exit 1"
 
 # Rewrite all requests to index.html so Flutter's client-side router handles them.
 [[redirects]]

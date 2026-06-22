@@ -1,0 +1,47 @@
+name: Deploy Prototypes to Netlify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'prototypes/**'
+      - 'packages/rds/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: stable
+          cache: true
+
+      - name: Enable Flutter web
+        run: flutter config --enable-web
+
+      - name: Get dependencies (rds package)
+        working-directory: packages/rds
+        run: flutter pub get
+
+      - name: Get dependencies (prototypes)
+        working-directory: prototypes
+        run: flutter pub get
+
+      - name: Build web
+        working-directory: prototypes
+        run: flutter build web --release --no-tree-shake-icons
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Deploy to Netlify
+        run: netlify deploy --prod --dir=prototypes/build/web
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
