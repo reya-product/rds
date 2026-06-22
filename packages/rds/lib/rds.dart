@@ -71,8 +71,14 @@ export 'components/text_field/rds_password_field.dart';
 export 'components/text_field/rds_search_bar.dart';
 
 // ---------------------------------------------------------------------------
-// Components — T2a Molecules (added by Wiring pass)
+// Components — T2a Molecules (wired 2026-06-22)
 // ---------------------------------------------------------------------------
+
+export 'components/segmented_control_input/rds_segmented_control_input.dart';
+export 'components/checkbox_input/rds_checkbox_input.dart';
+export 'components/date_field/rds_date_field.dart';
+export 'components/date_field/rds_time_field.dart';
+export 'components/date_field/rds_date_time_field.dart';
 
 // ---------------------------------------------------------------------------
 // Components — T2b List-based (added by Wiring pass)

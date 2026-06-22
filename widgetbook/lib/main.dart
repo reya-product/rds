@@ -3,6 +3,11 @@ import 'package:rds/rds.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 // ---------------------------------------------------------------------------
+// T2a Molecules — wired 2026-06-22
+import 'usecases/segmented_control_input.usecases.dart';
+import 'usecases/checkbox_input.usecases.dart';
+import 'usecases/date_field.usecases.dart';
+
 // T1 Atoms — wired 2026-06-22
 // ---------------------------------------------------------------------------
 import 'usecases/button.usecases.dart';
@@ -116,7 +121,22 @@ class RdsWidgetbook extends StatelessWidget {
             ),
           ],
         ),
-        // T2a Molecules — added by Wiring pass
+        WidgetbookFolder(
+          name: 'T2a Molecules',
+          children: [
+            WidgetbookFolder(
+              name: 'Form inputs',
+              children: [
+                segmentedControlInputComponent,
+                checkboxInputComponent,
+                dateFieldComponent,
+                timeFieldComponent,
+                dateTimeFieldComponent,
+              ],
+            ),
+          ],
+        ),
+        // T2b List-based — added by Wiring pass
         // T2b List-based — added by Wiring pass
         // T3 Organisms — added by Wiring pass
       ],
