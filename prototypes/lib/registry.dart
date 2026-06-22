@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'features/demo_feature.dart';
+import 'features/members_detail_page.dart';
 
 // ---------------------------------------------------------------------------
 // PrototypeEntry
@@ -61,6 +62,18 @@ class PrototypeRegistry {
       description: 'Sample prototype demonstrating the overlay + form pattern.',
       createdAt: DateTime(2026, 6, 22),
       builder: (ctx) => const DemoFeature(),
+    ),
+
+    // -----------------------------------------------------------------------
+    // Member's Detail Page — 2026-06-23
+    // -----------------------------------------------------------------------
+    'mbr_detail_v1_2606': PrototypeEntry(
+      slug: 'mbr_detail_v1_2606',
+      name: "Member's Detail Page",
+      description:
+          'Three-column member profile: contact info, upcoming appointments, and documents repository.',
+      createdAt: DateTime(2026, 6, 23),
+      builder: (ctx) => const MembersDetailPage(),
     ),
 
     // -----------------------------------------------------------------------

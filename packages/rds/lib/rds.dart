@@ -57,6 +57,13 @@ export 'components/tabs/rds_tab_item.dart';
 export 'components/tabs/rds_tabs.dart';
 export 'components/vertical_tabs/rds_vertical_tab_item.dart';
 export 'components/vertical_tabs/rds_vertical_tabs.dart';
+export 'components/container_tabs/rds_container_tabs.dart';
+
+// Sub Header
+export 'components/sub_header/rds_sub_header.dart';
+
+// Label Value Pair
+export 'components/label_value_pair/rds_label_value_pair.dart';
 
 // Date / Time pickers
 export 'components/date_picker/rds_picker_models.dart';
@@ -75,6 +82,7 @@ export 'components/text_field/rds_search_bar.dart';
 // Components — T2a Molecules (wired 2026-06-22)
 // ---------------------------------------------------------------------------
 
+export 'components/page_header/rds_page_header.dart';
 export 'components/segmented_control_input/rds_segmented_control_input.dart';
 export 'components/checkbox_input/rds_checkbox_input.dart';
 export 'components/date_field/rds_date_field.dart';

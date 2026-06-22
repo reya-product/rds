@@ -18,6 +18,21 @@ class RdsThemeData {
   final Color onSurfaceMuted;
 
   // ---------------------------------------------------------------------------
+  // Colors — extended surfaces
+  // ---------------------------------------------------------------------------
+
+  final Color surfaceContainerLowest;
+  final Color surfaceContainerLow;
+  final Color surfaceContainerHigh;
+  final Color surfaceContainerHighest;
+  final Color surfaceBright;
+  final Color surfaceTint;
+  final Color inverseSurface;
+  final Color inverseOnSurface;
+  /// Dark-tinted container surface — used for prominent headers / accent sections.
+  final Color surfaceContainerEmphasized;
+
+  // ---------------------------------------------------------------------------
   // Colors — primary
   // ---------------------------------------------------------------------------
 
@@ -25,6 +40,8 @@ class RdsThemeData {
   final Color primaryContainer;
   final Color onPrimary;
   final Color onPrimaryContainer;
+  /// Lighter primary container, typically used for subtle tinted backgrounds.
+  final Color primaryVariant;
 
   // ---------------------------------------------------------------------------
   // Colors — outline
@@ -32,6 +49,8 @@ class RdsThemeData {
 
   final Color outline;
   final Color outlineVariant;
+  /// Lightest outline — borders between adjacent surfaces of the same tone.
+  final Color outlineLowest;
   final Color scrim;
 
   // ---------------------------------------------------------------------------
@@ -68,6 +87,37 @@ class RdsThemeData {
   final Color neutral;
   final Color neutralContainer;
   final Color onNeutralContainer;
+
+  // ---------------------------------------------------------------------------
+  // Colors — extra containers (semantic use-case containers)
+  // ---------------------------------------------------------------------------
+
+  final Color mandatoryContainer;
+  final Color pinkContainer;
+  final Color purpleContainer;
+  final Color blueContainer;
+  final Color yellowContainer;
+
+  // ---------------------------------------------------------------------------
+  // Colors — icon / shape
+  // ---------------------------------------------------------------------------
+
+  final Color iconOnBackground;
+  final Color iconNeutral;
+  final Color iconError;
+  final Color iconWarning;
+  final Color iconSuccess;
+  final Color iconBlue;
+  final Color iconPurple;
+  final Color iconPink;
+  final Color iconYellow;
+
+  // ---------------------------------------------------------------------------
+  // Colors — graph
+  // ---------------------------------------------------------------------------
+
+  final Color graphPrimary;
+  final Color graphSecondary;
 
   // ---------------------------------------------------------------------------
   // Typography
@@ -154,14 +204,26 @@ class RdsThemeData {
     required this.onSurface,
     required this.onSurfaceVariant,
     required this.onSurfaceMuted,
+    // Colors — extended surfaces
+    required this.surfaceContainerLowest,
+    required this.surfaceContainerLow,
+    required this.surfaceContainerHigh,
+    required this.surfaceContainerHighest,
+    required this.surfaceBright,
+    required this.surfaceTint,
+    required this.inverseSurface,
+    required this.inverseOnSurface,
+    required this.surfaceContainerEmphasized,
     // Colors — primary
     required this.primary,
     required this.primaryContainer,
     required this.onPrimary,
     required this.onPrimaryContainer,
+    required this.primaryVariant,
     // Colors — outline
     required this.outline,
     required this.outlineVariant,
+    required this.outlineLowest,
     required this.scrim,
     // Colors — danger
     required this.danger,
@@ -182,6 +244,25 @@ class RdsThemeData {
     required this.neutral,
     required this.neutralContainer,
     required this.onNeutralContainer,
+    // Colors — extra containers
+    required this.mandatoryContainer,
+    required this.pinkContainer,
+    required this.purpleContainer,
+    required this.blueContainer,
+    required this.yellowContainer,
+    // Colors — icon / shape
+    required this.iconOnBackground,
+    required this.iconNeutral,
+    required this.iconError,
+    required this.iconWarning,
+    required this.iconSuccess,
+    required this.iconBlue,
+    required this.iconPurple,
+    required this.iconPink,
+    required this.iconYellow,
+    // Colors — graph
+    required this.graphPrimary,
+    required this.graphSecondary,
     // Typography
     required this.displayLarge,
     required this.displayMedium,
@@ -249,14 +330,26 @@ class RdsThemeData {
     Color? onSurface,
     Color? onSurfaceVariant,
     Color? onSurfaceMuted,
+    // Colors — extended surfaces
+    Color? surfaceContainerLowest,
+    Color? surfaceContainerLow,
+    Color? surfaceContainerHigh,
+    Color? surfaceContainerHighest,
+    Color? surfaceBright,
+    Color? surfaceTint,
+    Color? inverseSurface,
+    Color? inverseOnSurface,
+    Color? surfaceContainerEmphasized,
     // Colors — primary
     Color? primary,
     Color? primaryContainer,
     Color? onPrimary,
     Color? onPrimaryContainer,
+    Color? primaryVariant,
     // Colors — outline
     Color? outline,
     Color? outlineVariant,
+    Color? outlineLowest,
     Color? scrim,
     // Colors — danger
     Color? danger,
@@ -277,6 +370,25 @@ class RdsThemeData {
     Color? neutral,
     Color? neutralContainer,
     Color? onNeutralContainer,
+    // Colors — extra containers
+    Color? mandatoryContainer,
+    Color? pinkContainer,
+    Color? purpleContainer,
+    Color? blueContainer,
+    Color? yellowContainer,
+    // Colors — icon / shape
+    Color? iconOnBackground,
+    Color? iconNeutral,
+    Color? iconError,
+    Color? iconWarning,
+    Color? iconSuccess,
+    Color? iconBlue,
+    Color? iconPurple,
+    Color? iconPink,
+    Color? iconYellow,
+    // Colors — graph
+    Color? graphPrimary,
+    Color? graphSecondary,
     // Typography
     TextStyle? displayLarge,
     TextStyle? displayMedium,
@@ -339,14 +451,26 @@ class RdsThemeData {
       onSurface: onSurface ?? this.onSurface,
       onSurfaceVariant: onSurfaceVariant ?? this.onSurfaceVariant,
       onSurfaceMuted: onSurfaceMuted ?? this.onSurfaceMuted,
+      // Colors — extended surfaces
+      surfaceContainerLowest: surfaceContainerLowest ?? this.surfaceContainerLowest,
+      surfaceContainerLow: surfaceContainerLow ?? this.surfaceContainerLow,
+      surfaceContainerHigh: surfaceContainerHigh ?? this.surfaceContainerHigh,
+      surfaceContainerHighest: surfaceContainerHighest ?? this.surfaceContainerHighest,
+      surfaceBright: surfaceBright ?? this.surfaceBright,
+      surfaceTint: surfaceTint ?? this.surfaceTint,
+      inverseSurface: inverseSurface ?? this.inverseSurface,
+      inverseOnSurface: inverseOnSurface ?? this.inverseOnSurface,
+      surfaceContainerEmphasized: surfaceContainerEmphasized ?? this.surfaceContainerEmphasized,
       // Colors — primary
       primary: primary ?? this.primary,
       primaryContainer: primaryContainer ?? this.primaryContainer,
       onPrimary: onPrimary ?? this.onPrimary,
       onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
+      primaryVariant: primaryVariant ?? this.primaryVariant,
       // Colors — outline
       outline: outline ?? this.outline,
       outlineVariant: outlineVariant ?? this.outlineVariant,
+      outlineLowest: outlineLowest ?? this.outlineLowest,
       scrim: scrim ?? this.scrim,
       // Colors — danger
       danger: danger ?? this.danger,
@@ -367,6 +491,25 @@ class RdsThemeData {
       neutral: neutral ?? this.neutral,
       neutralContainer: neutralContainer ?? this.neutralContainer,
       onNeutralContainer: onNeutralContainer ?? this.onNeutralContainer,
+      // Colors — extra containers
+      mandatoryContainer: mandatoryContainer ?? this.mandatoryContainer,
+      pinkContainer: pinkContainer ?? this.pinkContainer,
+      purpleContainer: purpleContainer ?? this.purpleContainer,
+      blueContainer: blueContainer ?? this.blueContainer,
+      yellowContainer: yellowContainer ?? this.yellowContainer,
+      // Colors — icon / shape
+      iconOnBackground: iconOnBackground ?? this.iconOnBackground,
+      iconNeutral: iconNeutral ?? this.iconNeutral,
+      iconError: iconError ?? this.iconError,
+      iconWarning: iconWarning ?? this.iconWarning,
+      iconSuccess: iconSuccess ?? this.iconSuccess,
+      iconBlue: iconBlue ?? this.iconBlue,
+      iconPurple: iconPurple ?? this.iconPurple,
+      iconPink: iconPink ?? this.iconPink,
+      iconYellow: iconYellow ?? this.iconYellow,
+      // Colors — graph
+      graphPrimary: graphPrimary ?? this.graphPrimary,
+      graphSecondary: graphSecondary ?? this.graphSecondary,
       // Typography
       displayLarge: displayLarge ?? this.displayLarge,
       displayMedium: displayMedium ?? this.displayMedium,

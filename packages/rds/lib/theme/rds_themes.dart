@@ -15,7 +15,7 @@ import 'rds_theme_data.dart';
 /// Use [rdsThemeData] to get a [ThemeData] suitable for [MaterialApp.theme].
 abstract final class RdsThemes {
   // ---------------------------------------------------------------------------
-  // Light theme
+  // Reya light theme
   // ---------------------------------------------------------------------------
 
   static const RdsTheme light = RdsTheme(_reyaLightData);
@@ -28,14 +28,26 @@ abstract final class RdsThemes {
     onSurface: RdsColors.onSurfaceLight,
     onSurfaceVariant: RdsColors.onSurfaceVariantLight,
     onSurfaceMuted: RdsColors.onSurfaceMutedLight,
+    // Colors — extended surfaces
+    surfaceContainerLowest: Color(0xFFFFFFFF),
+    surfaceContainerLow: Color(0xFFF5F5F5),
+    surfaceContainerHigh: Color(0xFFE9E9E9),
+    surfaceContainerHighest: Color(0xFFE3E3E3),
+    surfaceBright: Color(0xFFFFFFFF),
+    surfaceTint: Color(0xFF534741),
+    inverseSurface: Color(0xFFFBFBFB),
+    inverseOnSurface: Color(0xFF1C1C1C),
+    surfaceContainerEmphasized: Color(0xFF042F21),
     // Colors — primary
     primary: RdsColors.primaryLight,
     primaryContainer: RdsColors.primaryContainerLight,
     onPrimary: RdsColors.onPrimaryLight,
     onPrimaryContainer: RdsColors.onPrimaryContainerLight,
+    primaryVariant: RdsColors.reyaPurple200,
     // Colors — outline
     outline: RdsColors.outlineLight,
     outlineVariant: RdsColors.outlineVariantLight,
+    outlineLowest: Color(0xFFE3E3E3),
     scrim: RdsColors.scrimLight,
     // Colors — danger
     danger: RdsColors.dangerLight,
@@ -56,6 +68,25 @@ abstract final class RdsThemes {
     neutral: RdsColors.neutralLight,
     neutralContainer: RdsColors.neutralContainerLight,
     onNeutralContainer: RdsColors.onNeutralContainerLight,
+    // Colors — extra containers
+    mandatoryContainer: Color(0xFFF5F1ED),
+    pinkContainer: Color(0xFFF5E0E9),
+    purpleContainer: Color(0xFFE8DFEE),
+    blueContainer: Color(0xFFD4E5EF),
+    yellowContainer: Color(0xFFFDECCA),
+    // Colors — icon / shape
+    iconOnBackground: Color(0xFF042F21),
+    iconNeutral: Color(0xFF596561),
+    iconError: RdsColors.iconError,
+    iconWarning: RdsColors.iconWarning,
+    iconSuccess: RdsColors.iconSuccess,
+    iconBlue: RdsColors.iconBlue,
+    iconPurple: RdsColors.iconPurple,
+    iconPink: RdsColors.iconPink,
+    iconYellow: RdsColors.iconYellow,
+    // Colors — graph
+    graphPrimary: Color(0xFF9E7BC5),
+    graphSecondary: Color(0xFF007EB6),
     // Typography (same for both themes)
     displayLarge: RdsTypography.displayLarge,
     displayMedium: RdsTypography.displayMedium,
@@ -112,7 +143,7 @@ abstract final class RdsThemes {
   );
 
   // ---------------------------------------------------------------------------
-  // Dark theme
+  // Reya dark theme
   // ---------------------------------------------------------------------------
 
   static const RdsTheme dark = RdsTheme(_reyaDarkData);
@@ -123,13 +154,19 @@ abstract final class RdsThemes {
   /// Reya brand — dark color tokens. Alias for [dark].
   static const RdsTheme reyaDark = dark;
 
-  /// Love.Life brand — light color tokens.
-  /// Color values are identical to Reya until Love.Life tokens are provided.
-  static const RdsTheme loveDotLifeLight = light;
+  /// IHL brand — light color tokens.
+  static final RdsTheme ihlLight = RdsTheme(_reyaLightData.copyWith(
+    primary: const Color(0xFF006648),
+    primaryVariant: const Color(0xFF99C4B7),
+    primaryContainer: const Color(0xFF99C4B7),
+  ));
 
-  /// Love.Life brand — dark color tokens.
-  /// Color values are identical to Reya until Love.Life tokens are provided.
-  static const RdsTheme loveDotLifeDark = dark;
+  /// IHL brand — dark color tokens.
+  static final RdsTheme ihlDark = RdsTheme(_reyaDarkData.copyWith(
+    primary: const Color(0xFF92CEBC),
+    primaryVariant: const Color(0xFF337561),
+    primaryContainer: const Color(0xFF00B881),
+  ));
 
   static const RdsThemeData _reyaDarkData = RdsThemeData(
     // Colors — surfaces
@@ -139,14 +176,26 @@ abstract final class RdsThemes {
     onSurface: RdsColors.onSurfaceDark,
     onSurfaceVariant: RdsColors.onSurfaceVariantDark,
     onSurfaceMuted: RdsColors.onSurfaceMutedDark,
+    // Colors — extended surfaces
+    surfaceContainerLowest: Color(0xFF1A1A1A),
+    surfaceContainerLow: Color(0xFF363636),
+    surfaceContainerHigh: Color(0xFF5C5C5C),
+    surfaceContainerHighest: Color(0xFF6E6E6E),
+    surfaceBright: Color(0xFF1A1A1A),
+    surfaceTint: Color(0xFF534741),
+    inverseSurface: Color(0xFF434343),
+    inverseOnSurface: Color(0xFFFFFFFF),
+    surfaceContainerEmphasized: Color(0xFFB8B8B8),
     // Colors — primary
     primary: RdsColors.primaryDark,
     primaryContainer: RdsColors.primaryContainerDark,
     onPrimary: RdsColors.onPrimaryDark,
     onPrimaryContainer: RdsColors.onPrimaryContainerDark,
+    primaryVariant: RdsColors.reyaPurple700,
     // Colors — outline
     outline: RdsColors.outlineDark,
     outlineVariant: RdsColors.outlineVariantDark,
+    outlineLowest: Color(0xFF434343),
     scrim: RdsColors.scrimDark,
     // Colors — danger
     danger: RdsColors.dangerDark,
@@ -167,6 +216,25 @@ abstract final class RdsThemes {
     neutral: RdsColors.neutralDark,
     neutralContainer: RdsColors.neutralContainerDark,
     onNeutralContainer: RdsColors.onNeutralContainerDark,
+    // Colors — extra containers
+    mandatoryContainer: Color(0xFF271802),
+    pinkContainer: Color(0xFF8B2D55),
+    purpleContainer: Color(0xFF614078),
+    blueContainer: Color(0xFF326786),
+    yellowContainer: Color(0xFF8A7300),
+    // Colors — icon / shape
+    iconOnBackground: Color(0xFFFCFCFC),
+    iconNeutral: Color(0xFF908F93),
+    iconError: RdsColors.iconError,
+    iconWarning: RdsColors.iconWarning,
+    iconSuccess: RdsColors.iconSuccess,
+    iconBlue: RdsColors.iconBlue,
+    iconPurple: RdsColors.iconPurple,
+    iconPink: RdsColors.iconPink,
+    iconYellow: RdsColors.iconYellow,
+    // Colors — graph
+    graphPrimary: Color(0xFF614078),
+    graphSecondary: Color(0xFF326786),
     // Typography (same as light)
     displayLarge: RdsTypography.displayLarge,
     displayMedium: RdsTypography.displayMedium,
@@ -262,7 +330,7 @@ ThemeData rdsThemeData({
     onErrorContainer: rdsTheme.onDangerContainer,
     surface: rdsTheme.surface,
     onSurface: rdsTheme.onSurface,
-    surfaceContainerHighest: rdsTheme.surfaceContainer,
+    surfaceContainerHighest: rdsTheme.surfaceContainerHighest,
     onSurfaceVariant: rdsTheme.onSurfaceVariant,
     outline: rdsTheme.outline,
     outlineVariant: rdsTheme.outlineVariant,

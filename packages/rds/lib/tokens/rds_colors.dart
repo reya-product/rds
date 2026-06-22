@@ -23,7 +23,19 @@ abstract final class RdsColors {
   static const Color neutral950 = Color(0xFF030712);
 
   // ---------------------------------------------------------------------------
-  // Brand — clinical teal-blue
+  // Reya brand — purple / violet
+  // ---------------------------------------------------------------------------
+
+  static const Color reyaPurple900 = Color(0xFF150C29);
+  static const Color reyaPurple800 = Color(0xFF3A00B8);
+  static const Color reyaPurple700 = Color(0xFF493375);
+  static const Color reyaPurple600 = Color(0xFF6A4CA9);
+  static const Color reyaPurple400 = Color(0xFFA592CE);
+  static const Color reyaPurple300 = Color(0xFFA699C4);
+  static const Color reyaPurple200 = Color(0xFFE3DBF5);
+
+  // ---------------------------------------------------------------------------
+  // Legacy brand teal — kept for badge color compatibility
   // ---------------------------------------------------------------------------
 
   static const Color brand50 = Color(0xFFEFF8F8);
@@ -117,82 +129,94 @@ abstract final class RdsColors {
   static const Color badgeNeutralText = Color(0xFF374151);
 
   // ---------------------------------------------------------------------------
-  // Light theme semantic roles
+  // Reya light semantic roles
   // ---------------------------------------------------------------------------
 
-  static const Color surfaceLight = neutral0;
-  static const Color surfaceVariantLight = neutral50;
-  static const Color surfaceContainerLight = neutral100;
-  static const Color onSurfaceLight = neutral900;
-  static const Color onSurfaceVariantLight = neutral600;
-  static const Color onSurfaceMutedLight = neutral400;
+  static const Color surfaceLight = Color(0xFFFBFBFB);
+  static const Color surfaceVariantLight = Color(0xFFE3E3E3);
+  static const Color surfaceContainerLight = Color(0xFFEFEFEF);
+  static const Color onSurfaceLight = Color(0xFF1C1C1C);
+  static const Color onSurfaceVariantLight = Color(0xFF5F5F5F);
+  static const Color onSurfaceMutedLight = Color(0xFF7B7B7B);
 
-  static const Color primaryLight = brand500;
-  static const Color primaryContainerLight = brand50;
-  static const Color onPrimaryLight = neutral0;
-  static const Color onPrimaryContainerLight = brand700;
+  static const Color primaryLight = reyaPurple600;
+  static const Color primaryContainerLight = reyaPurple300;
+  static const Color onPrimaryLight = Color(0xFFFFFFFF);
+  static const Color onPrimaryContainerLight = reyaPurple900;
 
-  static const Color outlineLight = neutral300;
-  static const Color outlineVariantLight = neutral200;
-  static const Color scrimLight = Color(0x66111827); // neutral-900 @ 40%
+  static const Color outlineLight = Color(0xFF787878);
+  static const Color outlineVariantLight = Color(0xFFC7C7C7);
+  static const Color scrimLight = Color(0x661C1C1C);
 
-  static const Color dangerLight = danger600;
-  static const Color dangerContainerLight = danger50;
-  static const Color onDangerLight = neutral0;
-  static const Color onDangerContainerLight = danger700;
+  static const Color dangerLight = Color(0xFFBA1A1A);
+  static const Color dangerContainerLight = Color(0xFFFFE2DE);
+  static const Color onDangerLight = Color(0xFFFFFFFF);
+  static const Color onDangerContainerLight = Color(0xFFBA1A1A);
 
-  static const Color warningLight = warning600;
-  static const Color warningContainerLight = warning50;
-  static const Color onWarningLight = neutral0;
-  static const Color onWarningContainerLight = warning800;
+  static const Color warningLight = Color(0xFFAD6430);
+  static const Color warningContainerLight = Color(0xFFFADECA);
+  static const Color onWarningLight = Color(0xFFFFFFFF);
+  static const Color onWarningContainerLight = Color(0xFFAD6430);
 
-  static const Color successLight = success600;
-  static const Color successContainerLight = success50;
-  static const Color onSuccessLight = neutral0;
-  static const Color onSuccessContainerLight = success700;
+  static const Color successLight = Color(0xFF0D871D);
+  static const Color successContainerLight = Color(0xFFDCEDDC);
+  static const Color onSuccessLight = Color(0xFFFFFFFF);
+  static const Color onSuccessContainerLight = Color(0xFF0D871D);
 
-  static const Color neutralLight = neutral600;
-  static const Color neutralContainerLight = neutral100;
-  static const Color onNeutralContainerLight = neutral700;
+  static const Color neutralLight = Color(0xFF596561);
+  static const Color neutralContainerLight = Color(0xFFE9E9E9);
+  static const Color onNeutralContainerLight = reyaPurple900;
 
   // ---------------------------------------------------------------------------
-  // Dark theme semantic roles
+  // Reya dark semantic roles
   // ---------------------------------------------------------------------------
 
-  static const Color surfaceDark = Color(0xFF0F1117);
-  static const Color surfaceVariantDark = Color(0xFF1A1F2C);
-  static const Color surfaceContainerDark = Color(0xFF242A36);
-  static const Color onSurfaceDark = Color(0xFFE8EAED);
-  static const Color onSurfaceVariantDark = Color(0xFF9AA0AC);
-  static const Color onSurfaceMutedDark = Color(0xFF5C6370);
+  static const Color surfaceDark = Color(0xFF2E2E2E);
+  static const Color surfaceVariantDark = Color(0xFF454545);
+  static const Color surfaceContainerDark = Color(0xFF4A4A4A);
+  static const Color onSurfaceDark = Color(0xFFFCFCFC);
+  static const Color onSurfaceVariantDark = Color(0xFFADADAD);
+  static const Color onSurfaceMutedDark = Color(0xFFACACAC);
 
-  static const Color primaryDark = brand400;
-  static const Color primaryContainerDark = brand900;
-  static const Color onPrimaryDark = neutral950;
-  static const Color onPrimaryContainerDark = brand200;
+  static const Color primaryDark = reyaPurple400;
+  static const Color primaryContainerDark = reyaPurple800;
+  static const Color onPrimaryDark = Color(0xFF232323);
+  static const Color onPrimaryContainerDark = Color(0xFFFCFCFC);
 
-  static const Color outlineDark = Color(0xFF3A3F4B);
-  static const Color outlineVariantDark = Color(0xFF2D3240);
-  static const Color scrimDark = Color(0x99000000); // black @ 60%
+  static const Color outlineDark = Color(0xFFF3F3F3);
+  static const Color outlineVariantDark = Color(0xFF545454);
+  static const Color scrimDark = Color(0x99000000);
 
-  static const Color dangerDark = danger400;
-  static const Color dangerContainerDark = danger900;
-  static const Color onDangerDark = neutral950;
-  static const Color onDangerContainerDark = danger200;
+  static const Color dangerDark = Color(0xFFFF453A);
+  static const Color dangerContainerDark = Color(0xFF700E00);
+  static const Color onDangerDark = Color(0xFF232323);
+  static const Color onDangerContainerDark = Color(0xFFFF453A);
 
-  static const Color warningDark = warning400;
-  static const Color warningContainerDark = warning900;
-  static const Color onWarningDark = neutral950;
-  static const Color onWarningContainerDark = warning200;
+  static const Color warningDark = Color(0xFFFFA601);
+  static const Color warningContainerDark = Color(0xFFA84F10);
+  static const Color onWarningDark = Color(0xFF232323);
+  static const Color onWarningContainerDark = Color(0xFFFFA601);
 
-  static const Color successDark = success400;
-  static const Color successContainerDark = success900;
-  static const Color onSuccessDark = neutral950;
-  static const Color onSuccessContainerDark = success200;
+  static const Color successDark = Color(0xFF34C761);
+  static const Color successContainerDark = Color(0xFF3E793E);
+  static const Color onSuccessDark = Color(0xFF232323);
+  static const Color onSuccessContainerDark = Color(0xFF34C761);
 
-  static const Color neutralDark = Color(0xFF9AA0AC);
-  static const Color neutralContainerDark = Color(0xFF242A36);
-  static const Color onNeutralContainerDark = Color(0xFFCBD5E1);
+  static const Color neutralDark = Color(0xFF908F93);
+  static const Color neutralContainerDark = Color(0xFF737373);
+  static const Color onNeutralContainerDark = Color(0xFFFCFCFC);
+
+  // ---------------------------------------------------------------------------
+  // Icon / shape colors (theme-independent)
+  // ---------------------------------------------------------------------------
+
+  static const Color iconError = Color(0xFFE96363);
+  static const Color iconWarning = Color(0xFFEF7015);
+  static const Color iconSuccess = Color(0xFF6FA05A);
+  static const Color iconBlue = Color(0xFF5E98BC);
+  static const Color iconPurple = Color(0xFF9E7BC5);
+  static const Color iconPink = Color(0xFFD765A1);
+  static const Color iconYellow = Color(0xFFB78F01);
 
   // ---------------------------------------------------------------------------
   // State layer opacities

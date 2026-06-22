@@ -42,6 +42,20 @@ class RdsTheme extends ThemeExtension<RdsTheme> {
   Color get onSurfaceMuted => data.onSurfaceMuted;
 
   // ---------------------------------------------------------------------------
+  // Color — extended surfaces
+  // ---------------------------------------------------------------------------
+
+  Color get surfaceContainerLowest => data.surfaceContainerLowest;
+  Color get surfaceContainerLow => data.surfaceContainerLow;
+  Color get surfaceContainerHigh => data.surfaceContainerHigh;
+  Color get surfaceContainerHighest => data.surfaceContainerHighest;
+  Color get surfaceBright => data.surfaceBright;
+  Color get surfaceTint => data.surfaceTint;
+  Color get inverseSurface => data.inverseSurface;
+  Color get inverseOnSurface => data.inverseOnSurface;
+  Color get surfaceContainerEmphasized => data.surfaceContainerEmphasized;
+
+  // ---------------------------------------------------------------------------
   // Color — primary
   // ---------------------------------------------------------------------------
 
@@ -49,6 +63,7 @@ class RdsTheme extends ThemeExtension<RdsTheme> {
   Color get primaryContainer => data.primaryContainer;
   Color get onPrimary => data.onPrimary;
   Color get onPrimaryContainer => data.onPrimaryContainer;
+  Color get primaryVariant => data.primaryVariant;
 
   // ---------------------------------------------------------------------------
   // Color — outline
@@ -56,6 +71,7 @@ class RdsTheme extends ThemeExtension<RdsTheme> {
 
   Color get outline => data.outline;
   Color get outlineVariant => data.outlineVariant;
+  Color get outlineLowest => data.outlineLowest;
   Color get scrim => data.scrim;
 
   // ---------------------------------------------------------------------------
@@ -92,6 +108,37 @@ class RdsTheme extends ThemeExtension<RdsTheme> {
   Color get neutral => data.neutral;
   Color get neutralContainer => data.neutralContainer;
   Color get onNeutralContainer => data.onNeutralContainer;
+
+  // ---------------------------------------------------------------------------
+  // Color — extra containers
+  // ---------------------------------------------------------------------------
+
+  Color get mandatoryContainer => data.mandatoryContainer;
+  Color get pinkContainer => data.pinkContainer;
+  Color get purpleContainer => data.purpleContainer;
+  Color get blueContainer => data.blueContainer;
+  Color get yellowContainer => data.yellowContainer;
+
+  // ---------------------------------------------------------------------------
+  // Color — icon / shape
+  // ---------------------------------------------------------------------------
+
+  Color get iconOnBackground => data.iconOnBackground;
+  Color get iconNeutral => data.iconNeutral;
+  Color get iconError => data.iconError;
+  Color get iconWarning => data.iconWarning;
+  Color get iconSuccess => data.iconSuccess;
+  Color get iconBlue => data.iconBlue;
+  Color get iconPurple => data.iconPurple;
+  Color get iconPink => data.iconPink;
+  Color get iconYellow => data.iconYellow;
+
+  // ---------------------------------------------------------------------------
+  // Color — graph
+  // ---------------------------------------------------------------------------
+
+  Color get graphPrimary => data.graphPrimary;
+  Color get graphSecondary => data.graphSecondary;
 
   // ---------------------------------------------------------------------------
   // Typography

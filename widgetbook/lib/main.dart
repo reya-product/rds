@@ -16,6 +16,7 @@ import 'usecases/list.usecases.dart';
 import 'usecases/list_inputs.usecases.dart';
 
 // T2a Molecules — wired 2026-06-22
+import 'usecases/page_header.usecases.dart';
 import 'usecases/segmented_control_input.usecases.dart';
 import 'usecases/checkbox_input.usecases.dart';
 import 'usecases/date_field.usecases.dart';
@@ -38,6 +39,9 @@ import 'usecases/toggle_switch.usecases.dart';
 import 'usecases/toast.usecases.dart';
 import 'usecases/tabs.usecases.dart';
 import 'usecases/vertical_tabs.usecases.dart';
+import 'usecases/container_tabs.usecases.dart';
+import 'usecases/sub_header.usecases.dart';
+import 'usecases/label_value_pair.usecases.dart';
 import 'usecases/date_picker.usecases.dart';
 import 'usecases/text_field.usecases.dart';
 
@@ -123,6 +127,7 @@ class RdsWidgetbook extends StatelessWidget {
                 avatarComponent,
                 tooltipComponent,
                 inputChipComponent,
+                subHeaderComponent,
               ],
             ),
             WidgetbookFolder(
@@ -139,6 +144,7 @@ class RdsWidgetbook extends StatelessWidget {
               children: [
                 tabsComponent,
                 verticalTabsComponent,
+                containerTabsComponent,
               ],
             ),
             WidgetbookFolder(
@@ -161,6 +167,12 @@ class RdsWidgetbook extends StatelessWidget {
         WidgetbookFolder(
           name: 'T2a Molecules',
           children: [
+            WidgetbookFolder(
+              name: 'Headers',
+              children: [
+                pageHeaderComponent,
+              ],
+            ),
             WidgetbookFolder(
               name: 'Form inputs',
               children: [
@@ -214,6 +226,7 @@ class RdsWidgetbook extends StatelessWidget {
               name: 'Data',
               children: [
                 compactTableComponent,
+                labelValuePairComponent,
               ],
             ),
             WidgetbookFolder(
@@ -244,12 +257,12 @@ class RdsWidgetbook extends StatelessWidget {
               data: RdsBrandThemes.reya.buildThemeData(Brightness.dark),
             ),
             WidgetbookTheme(
-              name: 'Love.Life · Light',
-              data: RdsBrandThemes.loveDotLife.buildThemeData(Brightness.light),
+              name: 'IHL · Light',
+              data: RdsBrandThemes.ihl.buildThemeData(Brightness.light),
             ),
             WidgetbookTheme(
-              name: 'Love.Life · Dark',
-              data: RdsBrandThemes.loveDotLife.buildThemeData(Brightness.dark),
+              name: 'IHL · Dark',
+              data: RdsBrandThemes.ihl.buildThemeData(Brightness.dark),
             ),
           ],
           themeBuilder: (context, theme, child) {
@@ -274,11 +287,19 @@ class _ColorPalettePreview extends StatelessWidget {
     final rds = Theme.of(context).extension<RdsTheme>()!;
 
     final roles = <(String, Color, Color)>[
+      // Surfaces
       ('surface', rds.surface, rds.onSurface),
       ('surface-variant', rds.surfaceVariant, rds.onSurface),
       ('surface-container', rds.surfaceContainer, rds.onSurface),
+      ('surface-container-low', rds.surfaceContainerLow, rds.onSurface),
+      ('surface-container-high', rds.surfaceContainerHigh, rds.onSurface),
+      ('surface-bright', rds.surfaceBright, rds.onSurface),
+      ('surface-emphasized', rds.surfaceContainerEmphasized, rds.inverseOnSurface),
+      // Primary
       ('primary', rds.primary, rds.onPrimary),
       ('primary-container', rds.primaryContainer, rds.onPrimaryContainer),
+      ('primary-variant', rds.primaryVariant, rds.onPrimaryContainer),
+      // Semantic
       ('danger', rds.danger, rds.onDanger),
       ('danger-container', rds.dangerContainer, rds.onDangerContainer),
       ('warning', rds.warning, rds.onWarning),
@@ -287,8 +308,29 @@ class _ColorPalettePreview extends StatelessWidget {
       ('success-container', rds.successContainer, rds.onSuccessContainer),
       ('neutral', rds.neutral, Colors.white),
       ('neutral-container', rds.neutralContainer, rds.onNeutralContainer),
+      // Outline
       ('outline', rds.outline, rds.onSurface),
       ('outline-variant', rds.outlineVariant, rds.onSurface),
+      ('outline-lowest', rds.outlineLowest, rds.onSurface),
+      // Extra containers
+      ('mandatory-container', rds.mandatoryContainer, rds.onSurface),
+      ('pink-container', rds.pinkContainer, rds.onSurface),
+      ('purple-container', rds.purpleContainer, rds.onSurface),
+      ('blue-container', rds.blueContainer, rds.onSurface),
+      ('yellow-container', rds.yellowContainer, rds.onSurface),
+      // Icon colors
+      ('icon-on-bg', rds.iconOnBackground, Colors.white),
+      ('icon-neutral', rds.iconNeutral, Colors.white),
+      ('icon-error', rds.iconError, Colors.white),
+      ('icon-warning', rds.iconWarning, Colors.white),
+      ('icon-success', rds.iconSuccess, Colors.white),
+      ('icon-blue', rds.iconBlue, Colors.white),
+      ('icon-purple', rds.iconPurple, Colors.white),
+      ('icon-pink', rds.iconPink, Colors.white),
+      ('icon-yellow', rds.iconYellow, Colors.white),
+      // Graph
+      ('graph-primary', rds.graphPrimary, Colors.white),
+      ('graph-secondary', rds.graphSecondary, Colors.white),
     ];
 
     return Scaffold(

@@ -11,7 +11,7 @@ import 'rds_themes.dart';
 /// A named brand theme: color palette (light + dark) + typeface.
 ///
 /// Two brands are pre-defined: [RdsBrandThemes.reya] and
-/// [RdsBrandThemes.loveDotLife].  The [buildThemeData] helper returns a
+/// [RdsBrandThemes.ihl].  The [buildThemeData] helper returns a
 /// [ThemeData] ready for [MaterialApp.theme] or Widgetbook's [ThemeAddon].
 class RdsBrandTheme {
   const RdsBrandTheme({
@@ -58,31 +58,12 @@ abstract final class RdsBrandThemes {
     applyFont: (t) => GoogleFonts.schibstedGroteskTextTheme(t),
   );
 
-  // ---- Love.Life — Karelia -------------------------------------------------
-  //
-  // Karelia is a custom/licensed typeface.
-  //
-  // To use the real font:
-  //   1. Add the TTF/OTF files under packages/rds/assets/fonts/Karelia/
-  //   2. Declare them in packages/rds/pubspec.yaml:
-  //        flutter:
-  //          fonts:
-  //            - family: Karelia
-  //              fonts:
-  //                - asset: assets/fonts/Karelia/Karelia-Regular.ttf
-  //                - asset: assets/fonts/Karelia/Karelia-Medium.ttf
-  //                  weight: 500
-  //                - asset: assets/fonts/Karelia/Karelia-Bold.ttf
-  //                  weight: 700
-  //   3. Replace the applyFont lambda below:
-  //        applyFont: (t) => t.apply(fontFamily: 'Karelia'),
-  //
-  // Temporary placeholder: Plus Jakarta Sans (visually similar sans-serif).
+  // ---- IHL — Karelia -------------------------------------------------------
 
-  static final loveDotLife = RdsBrandTheme(
-    name: 'Love.Life',
-    light: RdsThemes.loveDotLifeLight,
-    dark: RdsThemes.loveDotLifeDark,
-    applyFont: (t) => GoogleFonts.plusJakartaSansTextTheme(t),
+  static final ihl = RdsBrandTheme(
+    name: 'IHL',
+    light: RdsThemes.ihlLight,
+    dark: RdsThemes.ihlDark,
+    applyFont: (t) => t.apply(fontFamily: 'Karelia'),
   );
 }

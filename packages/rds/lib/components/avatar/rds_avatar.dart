@@ -46,6 +46,9 @@ enum RdsAvatarSize {
 
 /// A circular avatar that can display an image, icon, or name initials.
 ///
+/// Set [onEdit] to show a pencil badge anchored to the bottom-right of the
+/// circle. The badge is always shown when [onEdit] is non-null.
+///
 /// ## Usage
 /// ```dart
 /// // Image avatar
@@ -55,11 +58,11 @@ enum RdsAvatarSize {
 ///   size: RdsAvatarSize.md,
 /// )
 ///
-/// // Initials avatar
+/// // Initials avatar with edit badge
 /// RdsAvatar(
 ///   type: RdsAvatarType.initials,
 ///   name: 'Jane Doe',
-///   backgroundColor: Colors.teal,
+///   onEdit: () => print('edit tapped'),
 /// )
 ///
 /// // Icon avatar
@@ -68,7 +71,7 @@ enum RdsAvatarSize {
 ///   icon: RdsIcons.user,
 /// )
 /// ```
-class RdsAvatar extends StatelessWidget {
+class RdsAvatar extends StatefulWidget {
   /// How the avatar content is rendered.
   final RdsAvatarType type;
 
@@ -90,6 +93,10 @@ class RdsAvatar extends StatelessWidget {
   /// Whether the background fill is shown. When false the circle is transparent.
   final bool showBackground;
 
+  /// When non-null, a circular edit badge (pencil icon) is shown at the
+  /// bottom-right of the avatar. Tapping the badge calls this callback.
+  final VoidCallback? onEdit;
+
   const RdsAvatar({
     super.key,
     required this.type,
@@ -99,14 +106,20 @@ class RdsAvatar extends StatelessWidget {
     this.size = RdsAvatarSize.md,
     this.backgroundColor,
     this.showBackground = true,
+    this.onEdit,
   });
 
+  @override
+  State<RdsAvatar> createState() => _RdsAvatarState();
+}
+
+class _RdsAvatarState extends State<RdsAvatar> {
   // ---------------------------------------------------------------------------
   // Size helpers
   // ---------------------------------------------------------------------------
 
   double _diameter() {
-    switch (size) {
+    switch (widget.size) {
       case RdsAvatarSize.xs:
         return 24;
       case RdsAvatarSize.sm:
@@ -123,7 +136,7 @@ class RdsAvatar extends StatelessWidget {
   }
 
   double _iconSize() {
-    switch (size) {
+    switch (widget.size) {
       case RdsAvatarSize.xs:
         return 12;
       case RdsAvatarSize.sm:
@@ -140,7 +153,7 @@ class RdsAvatar extends StatelessWidget {
   }
 
   TextStyle _initialsTextStyle(RdsTheme rds) {
-    switch (size) {
+    switch (widget.size) {
       case RdsAvatarSize.xs:
         return rds.labelSmall;
       case RdsAvatarSize.sm:
@@ -151,6 +164,21 @@ class RdsAvatar extends StatelessWidget {
       case RdsAvatarSize.xl:
       case RdsAvatarSize.xxl:
         return rds.titleMedium;
+    }
+  }
+
+  // Edit badge diameter scales with avatar size.
+  double _badgeDiameter() {
+    switch (widget.size) {
+      case RdsAvatarSize.xs:
+      case RdsAvatarSize.sm:
+        return 14;
+      case RdsAvatarSize.md:
+      case RdsAvatarSize.lg:
+        return 20;
+      case RdsAvatarSize.xl:
+      case RdsAvatarSize.xxl:
+        return 24;
     }
   }
 
@@ -173,28 +201,28 @@ class RdsAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final rds = Theme.of(context).extension<RdsTheme>()!;
     final diameter = _diameter();
-    final bg = showBackground
-        ? (backgroundColor ?? rds.primaryContainer)
+    final bg = widget.showBackground
+        ? (widget.backgroundColor ?? rds.primaryContainer)
         : Colors.transparent;
-    final fgColor = backgroundColor != null
+    final fgColor = widget.backgroundColor != null
         ? rds.onPrimary
         : rds.onPrimaryContainer;
 
     Widget inner;
 
-    switch (type) {
+    switch (widget.type) {
       case RdsAvatarType.image:
         inner = _buildImage(rds, fgColor);
 
       case RdsAvatarType.icon:
         inner = Icon(
-          icon ?? RdsIcons.user,
+          widget.icon ?? RdsIcons.user,
           size: _iconSize(),
           color: fgColor,
         );
 
       case RdsAvatarType.initials:
-        final initials = _extractInitials(name ?? '');
+        final initials = _extractInitials(widget.name ?? '');
         inner = Text(
           initials,
           style: _initialsTextStyle(rds).copyWith(color: fgColor),
@@ -204,9 +232,9 @@ class RdsAvatar extends StatelessWidget {
 
     final semanticLabel = _resolveSemanticLabel();
 
-    return Semantics(
+    Widget circle = Semantics(
       label: semanticLabel,
-      image: type == RdsAvatarType.image,
+      image: widget.type == RdsAvatarType.image,
       child: Container(
         width: diameter,
         height: diameter,
@@ -219,14 +247,56 @@ class RdsAvatar extends StatelessWidget {
         child: inner,
       ),
     );
+
+    if (widget.onEdit == null) return circle;
+
+    // Overlay the edit badge anchored to the bottom-right of the avatar circle.
+    final badgeDiam = _badgeDiameter();
+    final badgeIcon = badgeDiam * 0.55;
+    return SizedBox(
+      width: diameter,
+      height: diameter,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          circle,
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Semantics(
+              button: true,
+              label: 'Edit',
+              child: GestureDetector(
+                onTap: widget.onEdit,
+                child: Container(
+                  width: badgeDiam,
+                  height: badgeDiam,
+                  decoration: BoxDecoration(
+                    color: rds.primaryContainer,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: rds.surface, width: 1.5),
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    RdsIcons.edit,
+                    size: badgeIcon,
+                    color: rds.onPrimaryContainer,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildImage(RdsTheme rds, Color fallbackFg) {
-    if (imageUrl == null || imageUrl!.isEmpty) {
+    if (widget.imageUrl == null || widget.imageUrl!.isEmpty) {
       return Icon(RdsIcons.user, size: _iconSize(), color: fallbackFg);
     }
     return Image.network(
-      imageUrl!,
+      widget.imageUrl!,
       width: _diameter(),
       height: _diameter(),
       fit: BoxFit.cover,
@@ -237,9 +307,9 @@ class RdsAvatar extends StatelessWidget {
   }
 
   String _resolveSemanticLabel() {
-    if (name != null && name!.isNotEmpty) return name!;
-    if (type == RdsAvatarType.icon) return 'User avatar';
-    if (type == RdsAvatarType.image) return 'Profile image';
+    if (widget.name != null && widget.name!.isNotEmpty) return widget.name!;
+    if (widget.type == RdsAvatarType.icon) return 'User avatar';
+    if (widget.type == RdsAvatarType.image) return 'Profile image';
     return 'Avatar';
   }
 }

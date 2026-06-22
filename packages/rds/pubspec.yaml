@@ -20,3 +20,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Karelia
+      fonts:
+        - asset: assets/fonts/Karelia/Karelia-Regular.otf
+        - asset: assets/fonts/Karelia/Karelia-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Karelia/Karelia-Bold.otf
+          weight: 700
