@@ -1,0 +1,10 @@
+[build]
+  base    = "prototypes"
+  command = "flutter build web --release --no-tree-shake-icons"
+  publish = "build/web"
+
+# Rewrite all requests to index.html so Flutter's client-side router handles them.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

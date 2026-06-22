@@ -22,3 +22,4 @@ packages/rds/pubspec.lock
 
 # Web build output (built by CI)
 widgetbook/build/
+prototypes/build/
