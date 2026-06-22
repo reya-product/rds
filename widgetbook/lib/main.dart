@@ -61,6 +61,21 @@ class RdsWidgetbook extends StatelessWidget {
       child: Widgetbook.material(
       // ignore: avoid_redundant_argument_values
       directories: [
+        WidgetbookComponent(
+          name: '_Canvas test',
+          useCases: [
+            WidgetbookUseCase(
+              name: 'Red box',
+              builder: (context) => Container(
+                color: const Color(0xFFE53935),
+                width: 200,
+                height: 200,
+                alignment: Alignment.center,
+                child: const Text('Canvas works', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+          ],
+        ),
         WidgetbookFolder(
           name: 'Foundation',
           children: [
@@ -242,15 +257,6 @@ class RdsWidgetbook extends StatelessWidget {
             return Theme(data: theme, child: child);
           },
         ),
-        TextScaleAddon(
-          scales: [1.0, 1.15, 1.3],
-        ),
-        LocalizationAddon(
-          locales: const [Locale('en')],
-          localizationsDelegates: const [],
-        ),
-        GridAddon(),
-        AlignmentAddon(),
       ],
       ),
     );
