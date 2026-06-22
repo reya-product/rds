@@ -98,5 +98,10 @@ export 'components/list_inputs/rds_single_select_list_input.dart';
 export 'components/list_inputs/rds_toggle_list_input.dart';
 
 // ---------------------------------------------------------------------------
-// Components — T3 Organisms (added by Wiring pass)
+// Components — T3 Organisms (wired 2026-06-22)
 // ---------------------------------------------------------------------------
+
+export 'components/card/rds_card.dart';
+export 'components/card/rds_card_action.dart';
+export 'components/dropdown_field/rds_dropdown_field.dart';
+export 'components/combobox_field/rds_combobox_field.dart';

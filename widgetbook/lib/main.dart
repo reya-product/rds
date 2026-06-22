@@ -3,6 +3,11 @@ import 'package:rds/rds.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 // ---------------------------------------------------------------------------
+// T3 Organisms — wired 2026-06-22
+import 'usecases/card.usecases.dart';
+import 'usecases/dropdown_field.usecases.dart';
+import 'usecases/combobox_field.usecases.dart';
+
 // T2b List-based — wired 2026-06-22
 import 'usecases/dropdown_popup.usecases.dart';
 import 'usecases/list.usecases.dart';
@@ -172,7 +177,24 @@ class RdsWidgetbook extends StatelessWidget {
             ),
           ],
         ),
-        // T3 Organisms — added by Wiring pass
+        WidgetbookFolder(
+          name: 'T3 Organisms',
+          children: [
+            WidgetbookFolder(
+              name: 'Content',
+              children: [
+                cardComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Form inputs',
+              children: [
+                dropdownFieldComponent,
+                comboboxFieldComponent,
+              ],
+            ),
+          ],
+        ),
       ],
       addons: [
         ThemeAddon(
