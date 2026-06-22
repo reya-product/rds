@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rds/rds.dart';
+import '../../theme/rds_theme.dart';
 import 'rds_toast_widget.dart';
 
 // ---------------------------------------------------------------------------

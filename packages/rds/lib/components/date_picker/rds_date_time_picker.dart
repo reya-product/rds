@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rds/rds.dart';
+import '../../theme/rds_theme.dart';
+import '../../tokens/rds_shadows.dart';
 
 import 'rds_calendar_grid.dart';
 import 'rds_picker_models.dart';

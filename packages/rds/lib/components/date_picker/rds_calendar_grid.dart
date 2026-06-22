@@ -1,7 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:rds/rds.dart';
+import '../../theme/rds_theme.dart';
+import '../../tokens/rds_icons.dart';
+import '../../tokens/rds_shadows.dart';
 
 import 'rds_picker_models.dart';
 

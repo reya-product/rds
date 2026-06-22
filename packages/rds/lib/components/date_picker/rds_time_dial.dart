@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:rds/rds.dart';
+import '../../theme/rds_theme.dart';
 
 // ---------------------------------------------------------------------------
 // Clock dial widget

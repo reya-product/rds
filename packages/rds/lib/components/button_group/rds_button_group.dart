@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rds/rds.dart';
+import '../../theme/rds_theme.dart';
+import '../button/rds_button.dart';
 
 // ---------------------------------------------------------------------------
 // Enums
