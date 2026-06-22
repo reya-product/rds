@@ -28,6 +28,7 @@ export 'tokens/rds_icon_size.dart';
 export 'theme/rds_theme_data.dart';
 export 'theme/rds_theme.dart';
 export 'theme/rds_themes.dart';
+export 'theme/rds_brand_theme.dart';
 
 // ---------------------------------------------------------------------------
 // Components — T1 Atoms (wired 2026-06-22)

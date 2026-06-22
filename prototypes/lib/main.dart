@@ -13,10 +13,7 @@ class PrototypesApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Reya Prototypes',
       debugShowCheckedModeBanner: false,
-      theme: rdsThemeData(
-        brightness: Brightness.light,
-        rdsTheme: RdsThemes.light,
-      ),
+      theme: RdsBrandThemes.reya.buildThemeData(Brightness.light),
       routerConfig: router,
     );
   }

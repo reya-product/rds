@@ -49,10 +49,7 @@ class RdsWidgetbook extends StatelessWidget {
   // Provide the light RDS theme at the app root so use-case builders always
   // have a non-null RdsTheme extension even before ThemeAddon applies its
   // selection (Widgetbook 3.8+ changed when addons wrap the canvas context).
-  static final _defaultTheme = rdsThemeData(
-    brightness: Brightness.light,
-    rdsTheme: RdsThemes.light,
-  );
+  static final _defaultTheme = RdsBrandThemes.reya.buildThemeData(Brightness.light);
 
   @override
   Widget build(BuildContext context) {
@@ -239,18 +236,20 @@ class RdsWidgetbook extends StatelessWidget {
         ThemeAddon(
           themes: [
             WidgetbookTheme(
-              name: 'Light',
-              data: rdsThemeData(
-                brightness: Brightness.light,
-                rdsTheme: RdsThemes.light,
-              ),
+              name: 'Reya · Light',
+              data: RdsBrandThemes.reya.buildThemeData(Brightness.light),
             ),
             WidgetbookTheme(
-              name: 'Dark',
-              data: rdsThemeData(
-                brightness: Brightness.dark,
-                rdsTheme: RdsThemes.dark,
-              ),
+              name: 'Reya · Dark',
+              data: RdsBrandThemes.reya.buildThemeData(Brightness.dark),
+            ),
+            WidgetbookTheme(
+              name: 'Love.Life · Light',
+              data: RdsBrandThemes.loveDotLife.buildThemeData(Brightness.light),
+            ),
+            WidgetbookTheme(
+              name: 'Love.Life · Dark',
+              data: RdsBrandThemes.loveDotLife.buildThemeData(Brightness.dark),
             ),
           ],
           themeBuilder: (context, theme, child) {

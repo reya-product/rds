@@ -18,9 +18,9 @@ abstract final class RdsThemes {
   // Light theme
   // ---------------------------------------------------------------------------
 
-  static const RdsTheme light = RdsTheme(_lightData);
+  static const RdsTheme light = RdsTheme(_reyaLightData);
 
-  static const RdsThemeData _lightData = RdsThemeData(
+  static const RdsThemeData _reyaLightData = RdsThemeData(
     // Colors — surfaces
     surface: RdsColors.surfaceLight,
     surfaceVariant: RdsColors.surfaceVariantLight,
@@ -115,9 +115,23 @@ abstract final class RdsThemes {
   // Dark theme
   // ---------------------------------------------------------------------------
 
-  static const RdsTheme dark = RdsTheme(_darkData);
+  static const RdsTheme dark = RdsTheme(_reyaDarkData);
 
-  static const RdsThemeData _darkData = RdsThemeData(
+  /// Reya brand — light color tokens. Alias for [light].
+  static const RdsTheme reyaLight = light;
+
+  /// Reya brand — dark color tokens. Alias for [dark].
+  static const RdsTheme reyaDark = dark;
+
+  /// Love.Life brand — light color tokens.
+  /// Color values are identical to Reya until Love.Life tokens are provided.
+  static const RdsTheme loveDotLifeLight = light;
+
+  /// Love.Life brand — dark color tokens.
+  /// Color values are identical to Reya until Love.Life tokens are provided.
+  static const RdsTheme loveDotLifeDark = dark;
+
+  static const RdsThemeData _reyaDarkData = RdsThemeData(
     // Colors — surfaces
     surface: RdsColors.surfaceDark,
     surfaceVariant: RdsColors.surfaceVariantDark,
@@ -226,6 +240,7 @@ abstract final class RdsThemes {
 ThemeData rdsThemeData({
   required Brightness brightness,
   required RdsTheme rdsTheme,
+  TextTheme Function(TextTheme)? applyFont,
 }) {
   final colorScheme = ColorScheme(
     brightness: brightness,
@@ -254,7 +269,8 @@ ThemeData rdsThemeData({
     scrim: rdsTheme.scrim,
   );
 
-  final baseTextTheme = GoogleFonts.interTextTheme(
+  final _fontApplier = applyFont ?? (t) => GoogleFonts.schibstedGroteskTextTheme(t);
+  final baseTextTheme = _fontApplier(
     TextTheme(
       displayLarge: rdsTheme.displayLarge,
       displayMedium: rdsTheme.displayMedium,
