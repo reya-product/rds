@@ -125,7 +125,7 @@ class _RdsLabelValuePairState extends State<RdsLabelValuePair> {
           ),
           SizedBox(width: rds.space4),
           // Value — right
-          Flexible(
+          Expanded(
             flex: 2,
             child: Text(
               displayValue,

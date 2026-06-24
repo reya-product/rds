@@ -43,7 +43,7 @@ class _MembersDetailPageState extends State<MembersDetailPage> {
               // ── Three-column body ─────────────────────────────────────────
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(16),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -387,7 +387,7 @@ class _MiddlePanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          RdsTabs(
+          RdsContainerTabs(
             tabs: const [
               RdsTabItem(label: '2 UPCOMING'),
               RdsTabItem(label: 'PAST'),

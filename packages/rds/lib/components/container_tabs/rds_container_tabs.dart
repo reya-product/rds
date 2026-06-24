@@ -172,7 +172,12 @@ class _ContainerTabItemState extends State<_ContainerTabItem> {
               )
             : _focused && _isInteractive
                 ? Border.all(color: rds.primary, width: 2)
-                : null,
+                : !item.disabled
+                    ? Border(
+                        top: BorderSide(color: rds.outlineVariant, width: 1),
+                        right: BorderSide(color: rds.outlineVariant, width: 1),
+                      )
+                    : null,
       ),
       child: Stack(
         alignment: Alignment.center,

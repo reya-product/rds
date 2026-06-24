@@ -261,7 +261,7 @@ class _RdsAvatarState extends State<RdsAvatar> {
         children: [
           circle,
           Positioned(
-            bottom: 0,
+            top: 0,
             right: 0,
             child: Semantics(
               button: true,
