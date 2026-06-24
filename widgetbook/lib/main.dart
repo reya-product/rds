@@ -15,6 +15,9 @@ import 'usecases/dropdown_popup.usecases.dart';
 import 'usecases/list.usecases.dart';
 import 'usecases/list_inputs.usecases.dart';
 
+// T3 Organisms — forms
+import 'usecases/onboard_member_form.usecases.dart';
+
 // T2a Molecules — wired 2026-06-22
 import 'usecases/page_header.usecases.dart';
 import 'usecases/segmented_control_input.usecases.dart';
@@ -240,6 +243,7 @@ class RdsWidgetbook extends StatelessWidget {
               children: [
                 dropdownFieldComponent,
                 comboboxFieldComponent,
+                onboardMemberFormComponent,
               ],
             ),
           ],

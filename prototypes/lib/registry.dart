@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-import 'features/demo_feature.dart';
 import 'features/members_detail_page.dart';
 
 // ---------------------------------------------------------------------------
@@ -53,17 +52,6 @@ class PrototypeRegistry {
 
   /// All registered prototypes, keyed by slug.
   static final Map<String, PrototypeEntry> _entries = {
-    // -----------------------------------------------------------------------
-    // DEMO — replace or keep as a reference
-    // -----------------------------------------------------------------------
-    'demo0000000000demo': PrototypeEntry(
-      slug: 'demo0000000000demo',
-      name: 'Demo: Onboard Member',
-      description: 'Sample prototype demonstrating the overlay + form pattern.',
-      createdAt: DateTime(2026, 6, 22),
-      builder: (ctx) => const DemoFeature(),
-    ),
-
     // -----------------------------------------------------------------------
     // Member's Detail Page — 2026-06-23
     // -----------------------------------------------------------------------
