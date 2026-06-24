@@ -27,7 +27,7 @@ class _MembersDetailPageState extends State<MembersDetailPage> {
     final rds = Theme.of(context).extension<RdsTheme>()!;
 
     return Scaffold(
-      backgroundColor: rds.surfaceVariant,
+      backgroundColor: rds.surfaceContainer,
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1440),
