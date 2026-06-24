@@ -64,7 +64,7 @@ class _DemoFeatureState extends State<DemoFeature> {
                         children: [
                           RdsBadge(
                             label: 'Onboarding',
-                            color: RdsBadgeColor.primary,
+                            color: RdsBadgeColor.purple,
                           ),
                           const Spacer(),
                           RdsBadge(label: '0 members', color: RdsBadgeColor.neutral),
@@ -186,14 +186,14 @@ class _OnboardFormState extends State<_OnboardForm> {
         RdsTextField(
           label: 'Mobile #',
           mandatory: true,
-          inputType: RdsTextFieldInputType.phone,
+          inputType: RdsTextFieldInputType.number,
           onChanged: (_) {},
         ),
         SizedBox(height: rds.space4),
         RdsTextField(
           label: 'Email',
           mandatory: true,
-          inputType: RdsTextFieldInputType.email,
+          inputType: RdsTextFieldInputType.characters,
           onChanged: (_) {},
         ),
         SizedBox(height: rds.space6),
