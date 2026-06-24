@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 // ---------------------------------------------------------------------------
 
 /// Change this to your desired index password.
-const String kIndexPassword = 'reyads2026';
+const String kIndexPassword = 'reya123456';
 
 /// Notifier for whether the current session has authenticated to the index.
 /// Listened to by the router so redirects update reactively.
