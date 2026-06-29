@@ -254,7 +254,7 @@ class _PageHeader extends StatelessWidget {
 // _LeftPanel
 // ---------------------------------------------------------------------------
 
-class _LeftPanel extends StatelessWidget {
+class _LeftPanel extends StatefulWidget {
   const _LeftPanel({
     required this.selectedTab,
     required this.onTabChanged,
@@ -262,6 +262,57 @@ class _LeftPanel extends StatelessWidget {
 
   final int selectedTab;
   final ValueChanged<int> onTabChanged;
+
+  @override
+  State<_LeftPanel> createState() => _LeftPanelState();
+}
+
+class _LeftPanelState extends State<_LeftPanel> {
+  _ContactInfoData _info = _ContactInfoData(
+    firstName: 'Juliana',
+    middleName: '',
+    lastName: 'Crain',
+    dob: DateTime(1985, 8, 2),
+    sexAssignedAtBirth: 'Female',
+    preferredPronouns: 'She/Her',
+    mobilePhone: '+1 718-479-7777',
+    workPhone: '',
+    email: 'juliana@gmail.com',
+    streetAddress: '1444 Queens Ave',
+    city: 'LA',
+    state: 'California',
+    zip: '',
+  );
+
+  Future<void> _openEditPanel(BuildContext context) async {
+    final formKey = GlobalKey<_ContactInfoFormState>();
+
+    final result = await RdsRightPanel.show<_ContactInfoData>(
+      context: context,
+      title: 'Edit Contact Information',
+      body: _ContactInfoForm(key: formKey, initialData: _info),
+      footerActions: [
+        Builder(
+          builder: (ctx) => RdsButton(
+            label: 'CANCEL',
+            variant: RdsButtonVariant.outlined,
+            onPressed: () => Navigator.pop(ctx),
+          ),
+        ),
+        Builder(
+          builder: (ctx) => RdsButton(
+            label: 'SAVE',
+            onPressed: () =>
+                Navigator.pop(ctx, formKey.currentState?.getData()),
+          ),
+        ),
+      ],
+    );
+
+    if (result != null && mounted) {
+      setState(() => _info = result);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -280,8 +331,8 @@ class _LeftPanel extends StatelessWidget {
               RdsTabItem(label: 'PMT & GIFT CARDS'),
               RdsTabItem(label: 'TEAM'),
             ],
-            selectedIndex: selectedTab,
-            onChanged: onTabChanged,
+            selectedIndex: widget.selectedTab,
+            onChanged: widget.onTabChanged,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -292,43 +343,55 @@ class _LeftPanel extends StatelessWidget {
                   RdsSubHeader(
                     title: 'Contact Information',
                     actionLabel: 'EDIT',
-                    onAction: () {},
+                    onAction: () => _openEditPanel(context),
                   ),
                   RdsLabelValueList(
-                    items: const [
-                      RdsLabelValueItem(label: 'FIRST NAME', value: 'Juliana'),
-                      RdsLabelValueItem(label: 'MIDDLE NAME'),
-                      RdsLabelValueItem(label: 'LAST NAME', value: 'Crain'),
-                      RdsLabelValueItem(label: 'D.O.B', value: '02 Aug 1985'),
+                    items: [
+                      RdsLabelValueItem(
+                        label: 'FIRST NAME',
+                        value: _info.firstName,
+                      ),
+                      RdsLabelValueItem(
+                        label: 'MIDDLE NAME',
+                        value: _info.middleName,
+                      ),
+                      RdsLabelValueItem(
+                        label: 'LAST NAME',
+                        value: _info.lastName,
+                      ),
+                      RdsLabelValueItem(
+                        label: 'D.O.B',
+                        value: _formatDate(_info.dob),
+                      ),
                       RdsLabelValueItem(
                         label: 'SEX ASSIGNED AT BIRTH',
-                        value: 'Female',
+                        value: _info.sexAssignedAtBirth,
                       ),
                       RdsLabelValueItem(
                         label: 'PREFERRED PRONOUNS',
-                        value: 'She/ Her',
+                        value: _info.preferredPronouns,
                       ),
                       RdsLabelValueItem(
                         label: 'MOBILE #',
-                        value: '+1 718-479-7777',
-                        isLink: true,
+                        value: _info.mobilePhone,
+                        isLink: _info.mobilePhone.isNotEmpty,
                       ),
-                      RdsLabelValueItem(label: 'WORK PHONE #'),
+                      RdsLabelValueItem(
+                        label: 'WORK PHONE #',
+                        value: _info.workPhone,
+                      ),
                       RdsLabelValueItem(
                         label: 'EMAIL',
-                        value: 'juliana@gmail.com',
-                        isLink: true,
+                        value: _info.email,
+                        isLink: _info.email.isNotEmpty,
                       ),
                       RdsLabelValueItem(
                         label: 'STREET ADDRESS',
-                        value: '1444 Queens Ave',
+                        value: _info.streetAddress,
                       ),
-                      RdsLabelValueItem(label: 'CITY', value: 'LA'),
-                      RdsLabelValueItem(
-                        label: 'STATE',
-                        value: 'California',
-                      ),
-                      RdsLabelValueItem(label: 'ZIP'),
+                      RdsLabelValueItem(label: 'CITY', value: _info.city),
+                      RdsLabelValueItem(label: 'STATE', value: _info.state),
+                      RdsLabelValueItem(label: 'ZIP', value: _info.zip),
                     ],
                   ),
                   SizedBox(height: rds.space2),
@@ -903,3 +966,211 @@ class _DocumentData {
   final String name;
   final String? count;
 }
+
+// ---------------------------------------------------------------------------
+// _ContactInfoData  — editable contact info value object
+// ---------------------------------------------------------------------------
+
+class _ContactInfoData {
+  _ContactInfoData({
+    required this.firstName,
+    required this.middleName,
+    required this.lastName,
+    required this.dob,
+    required this.sexAssignedAtBirth,
+    required this.preferredPronouns,
+    required this.mobilePhone,
+    required this.workPhone,
+    required this.email,
+    required this.streetAddress,
+    required this.city,
+    required this.state,
+    required this.zip,
+  });
+
+  final String firstName;
+  final String middleName;
+  final String lastName;
+  final DateTime? dob;
+  final String sexAssignedAtBirth;
+  final String preferredPronouns;
+  final String mobilePhone;
+  final String workPhone;
+  final String email;
+  final String streetAddress;
+  final String city;
+  final String state;
+  final String zip;
+}
+
+String _formatDate(DateTime? date) {
+  if (date == null) return '';
+  const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+  ];
+  return '${date.day.toString().padLeft(2, '0')} ${months[date.month - 1]} ${date.year}';
+}
+
+// ---------------------------------------------------------------------------
+// _ContactInfoForm  — form body rendered inside RdsRightPanel
+// ---------------------------------------------------------------------------
+
+class _ContactInfoForm extends StatefulWidget {
+  const _ContactInfoForm({super.key, required this.initialData});
+
+  final _ContactInfoData initialData;
+
+  @override
+  State<_ContactInfoForm> createState() => _ContactInfoFormState();
+}
+
+class _ContactInfoFormState extends State<_ContactInfoForm> {
+  late final TextEditingController _firstName;
+  late final TextEditingController _middleName;
+  late final TextEditingController _lastName;
+  late final TextEditingController _mobile;
+  late final TextEditingController _workPhone;
+  late final TextEditingController _email;
+  late final TextEditingController _street;
+  late final TextEditingController _city;
+  late final TextEditingController _zip;
+
+  DateTime? _dob;
+  String? _sex;
+  String? _pronouns;
+  String? _state;
+
+  @override
+  void initState() {
+    super.initState();
+    final d = widget.initialData;
+    _firstName = TextEditingController(text: d.firstName);
+    _middleName = TextEditingController(text: d.middleName);
+    _lastName = TextEditingController(text: d.lastName);
+    _mobile = TextEditingController(text: d.mobilePhone);
+    _workPhone = TextEditingController(text: d.workPhone);
+    _email = TextEditingController(text: d.email);
+    _street = TextEditingController(text: d.streetAddress);
+    _city = TextEditingController(text: d.city);
+    _zip = TextEditingController(text: d.zip);
+    _dob = d.dob;
+    _sex = d.sexAssignedAtBirth.isEmpty ? null : d.sexAssignedAtBirth;
+    _pronouns = d.preferredPronouns.isEmpty ? null : d.preferredPronouns;
+    _state = d.state.isEmpty ? null : d.state;
+  }
+
+  @override
+  void dispose() {
+    _firstName.dispose();
+    _middleName.dispose();
+    _lastName.dispose();
+    _mobile.dispose();
+    _workPhone.dispose();
+    _email.dispose();
+    _street.dispose();
+    _city.dispose();
+    _zip.dispose();
+    super.dispose();
+  }
+
+  _ContactInfoData getData() => _ContactInfoData(
+        firstName: _firstName.text,
+        middleName: _middleName.text,
+        lastName: _lastName.text,
+        dob: _dob,
+        sexAssignedAtBirth: _sex ?? '',
+        preferredPronouns: _pronouns ?? '',
+        mobilePhone: _mobile.text,
+        workPhone: _workPhone.text,
+        email: _email.text,
+        streetAddress: _street.text,
+        city: _city.text,
+        state: _state ?? '',
+        zip: _zip.text,
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    final rds = Theme.of(context).extension<RdsTheme>()!;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        RdsTextField(label: 'First name', controller: _firstName, mandatory: true),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'Middle name', controller: _middleName),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'Last name', controller: _lastName, mandatory: true),
+        SizedBox(height: rds.space3),
+        RdsDateField(
+          label: 'Date of birth',
+          value: _dob,
+          onChanged: (d) => setState(() => _dob = d),
+          maxDate: DateTime.now(),
+        ),
+        SizedBox(height: rds.space3),
+        RdsDropdownField(
+          label: 'Sex assigned at birth',
+          value: _sex,
+          items: const [
+            RdsDropdownItem(value: 'Female', label: 'Female'),
+            RdsDropdownItem(value: 'Male', label: 'Male'),
+            RdsDropdownItem(value: 'Intersex', label: 'Intersex'),
+            RdsDropdownItem(value: 'Prefer not to say', label: 'Prefer not to say'),
+          ],
+          onChanged: (v) => setState(() => _sex = v as String?),
+        ),
+        SizedBox(height: rds.space3),
+        RdsDropdownField(
+          label: 'Preferred pronouns',
+          value: _pronouns,
+          items: const [
+            RdsDropdownItem(value: 'She/Her', label: 'She/Her'),
+            RdsDropdownItem(value: 'He/Him', label: 'He/Him'),
+            RdsDropdownItem(value: 'They/Them', label: 'They/Them'),
+            RdsDropdownItem(value: 'Ze/Hir', label: 'Ze/Hir'),
+            RdsDropdownItem(value: 'Prefer not to say', label: 'Prefer not to say'),
+          ],
+          onChanged: (v) => setState(() => _pronouns = v as String?),
+        ),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'Mobile phone', controller: _mobile),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'Work phone', controller: _workPhone),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'Email', controller: _email),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'Street address', controller: _street),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'City', controller: _city),
+        SizedBox(height: rds.space3),
+        RdsDropdownField(
+          label: 'State',
+          value: _state,
+          searchable: true,
+          items: _kUsStates
+              .map((s) => RdsDropdownItem(value: s, label: s))
+              .toList(),
+          onChanged: (v) => setState(() => _state = v as String?),
+        ),
+        SizedBox(height: rds.space3),
+        RdsTextField(label: 'ZIP code', controller: _zip),
+      ],
+    );
+  }
+}
+
+const _kUsStates = [
+  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+  'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+  'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+  'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+  'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
+  'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+  'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+  'West Virginia', 'Wisconsin', 'Wyoming',
+];
