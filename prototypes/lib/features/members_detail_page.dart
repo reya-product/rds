@@ -186,6 +186,17 @@ class _PageHeader extends StatelessWidget {
             ),
           ),
           const Spacer(),
+          RdsButton(
+            label: 'TEST BUTTON',
+            variant: RdsButtonVariant.tonal,
+            onPressed: () => RdsRightPanel.show(
+              context: context,
+              title: 'Fruits',
+              body: const _FruitListBody(),
+              footerActions: [],
+            ),
+          ),
+          SizedBox(width: rds.space2),
           // SCHEDULE/BUY tonal button
           RdsButton(
             label: 'SCHEDULE/BUY',
@@ -1174,3 +1185,62 @@ const _kUsStates = [
   'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
   'West Virginia', 'Wisconsin', 'Wyoming',
 ];
+
+// ---------------------------------------------------------------------------
+// _FruitListBody  — panel body for the Test Button
+// ---------------------------------------------------------------------------
+
+class _FruitListBody extends StatelessWidget {
+  const _FruitListBody();
+
+  static const _fruits = [
+    (name: 'Apple', description: 'A crisp, sweet fruit rich in fibre and vitamin C, available in hundreds of varieties from tart Granny Smith to honeyed Fuji.'),
+    (name: 'Mango', description: 'The king of tropical fruits — intensely sweet and fragrant with a smooth, buttery flesh and a fibrous stone at the centre.'),
+    (name: 'Strawberry', description: 'A bright red berry with a juicy, tangy-sweet flavour and a high vitamin C content, best enjoyed fresh at peak ripeness.'),
+    (name: 'Blueberry', description: 'Tiny dark-blue berries with a mild, sweet flavour and among the highest antioxidant levels of any common fruit.'),
+    (name: 'Pineapple', description: 'A spiky tropical fruit with golden flesh that balances sharp acidity and intense sweetness, rich in the enzyme bromelain.'),
+    (name: 'Peach', description: 'A stone fruit with soft, velvety skin and fragrant flesh that ranges from white to deep orange depending on the variety.'),
+    (name: 'Watermelon', description: 'A large summer fruit with a crisp, water-rich flesh that is refreshing, lightly sweet, and over 90% water by weight.'),
+    (name: 'Kiwi', description: 'A small egg-shaped fruit with bright green flesh, a tangy-sweet flavour, and more vitamin C per gram than an orange.'),
+    (name: 'Banana', description: 'A creamy, starchy fruit that ripens from green to yellow, growing sweeter as starches convert to sugar over time.'),
+    (name: 'Grape', description: 'Small, thin-skinned berries that grow in clusters and range from tart green varieties to rich, deeply flavoured black ones.'),
+    (name: 'Papaya', description: 'A tropical fruit with sunset-orange flesh, a musky sweetness, and the enzyme papain that aids digestion.'),
+    (name: 'Pomegranate', description: 'A leathery-skinned fruit filled with hundreds of jewel-like seeds, each bursting with a tart, ruby-red juice.'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final rds = Theme.of(context).extension<RdsTheme>()!;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: _fruits.map((fruit) {
+        return Container(
+          padding: EdgeInsets.symmetric(
+            vertical: rds.space4,
+          ),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: rds.outlineVariant, width: 1),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                fruit.name,
+                style: rds.titleSmall.copyWith(color: rds.onSurface),
+              ),
+              SizedBox(height: rds.space1),
+              Text(
+                fruit.description,
+                style: rds.bodySmall.copyWith(color: rds.onSurfaceVariant),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
