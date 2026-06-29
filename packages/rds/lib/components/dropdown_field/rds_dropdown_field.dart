@@ -196,8 +196,6 @@ class _RdsDropdownFieldState extends State<RdsDropdownField> {
     final bool isError =
         widget.errorText != null && widget.errorText!.isNotEmpty;
 
-    final borderRadius = BorderRadius.circular(rds.radiusMd);
-
     final borderColor = isError
         ? rds.danger
         : (_isFocused || _isOpen)
@@ -283,10 +281,8 @@ class _RdsDropdownFieldState extends State<RdsDropdownField> {
                 duration: rds.durationFast,
                 decoration: BoxDecoration(
                   color: fillColor,
-                  borderRadius: borderRadius,
-                  border: Border.all(
-                    color: borderColor,
-                    width: borderWidth,
+                  border: Border(
+                    bottom: BorderSide(color: borderColor, width: borderWidth),
                   ),
                 ),
                 child: Column(

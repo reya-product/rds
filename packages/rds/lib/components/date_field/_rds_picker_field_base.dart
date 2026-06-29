@@ -73,20 +73,20 @@ class _RdsPickerFieldBaseState extends State<RdsPickerFieldBase> {
   Widget build(BuildContext context) {
     final rds = Theme.of(context).extension<RdsTheme>()!;
 
-    final border = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(rds.radiusMd),
+    final border = UnderlineInputBorder(
+      borderRadius: BorderRadius.zero,
       borderSide: BorderSide(color: rds.outline),
     );
-    final focusedBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(rds.radiusMd),
+    final focusedBorder = UnderlineInputBorder(
+      borderRadius: BorderRadius.zero,
       borderSide: BorderSide(color: rds.primary, width: 2),
     );
-    final errorBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(rds.radiusMd),
+    final errorBorder = UnderlineInputBorder(
+      borderRadius: BorderRadius.zero,
       borderSide: BorderSide(color: rds.danger, width: 2),
     );
-    final disabledBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(rds.radiusMd),
+    final disabledBorder = UnderlineInputBorder(
+      borderRadius: BorderRadius.zero,
       borderSide: BorderSide(color: rds.outlineVariant),
     );
 

@@ -188,28 +188,28 @@ class _RdsPasswordFieldState extends State<RdsPasswordField> {
           fillColor: widget.readOnly || widget.disabled
               ? rds.surfaceContainer
               : rds.surface,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(rds.radiusMd),
+          border: UnderlineInputBorder(
+            borderRadius: BorderRadius.zero,
             borderSide: BorderSide(color: rds.outline),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(rds.radiusMd),
+          enabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.zero,
             borderSide: BorderSide(color: rds.outline),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(rds.radiusMd),
+          focusedBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.zero,
             borderSide: BorderSide(color: rds.primary, width: 2),
           ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(rds.radiusMd),
+          errorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.zero,
             borderSide: BorderSide(color: rds.danger, width: 2),
           ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(rds.radiusMd),
+          focusedErrorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.zero,
             borderSide: BorderSide(color: rds.danger, width: 2),
           ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(rds.radiusMd),
+          disabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.zero,
             borderSide: BorderSide(color: rds.outlineVariant),
           ),
           contentPadding: EdgeInsets.symmetric(
