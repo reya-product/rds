@@ -1,4 +1,4 @@
-name: Deploy Prototypes to Netlify
+name: Deploy Prototypes to GitHub Pages
 
 on:
   push:
@@ -7,6 +7,13 @@ on:
       - 'prototypes/**'
       - 'packages/rds/**'
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -35,13 +42,12 @@ jobs:
 
       - name: Build web
         working-directory: prototypes
-        run: flutter build web --release --no-tree-shake-icons
+        run: flutter build web --release --base-href /${{ github.event.repository.name }}/prototypes/ --no-tree-shake-icons
 
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
-
-      - name: Deploy to Netlify
-        run: netlify deploy --prod --dir=prototypes/build/web
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: prototypes/build/web
+          destination_dir: prototypes
+          keep_files: true

@@ -6,19 +6,17 @@ on:
     paths:
       - 'widgetbook/**'
       - 'packages/rds/**'
-  workflow_dispatch: # allow manual trigger from GitHub UI
+  workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: gh-pages
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -46,18 +44,40 @@ jobs:
         working-directory: widgetbook
         run: flutter build web --release --base-href /${{ github.event.repository.name }}/
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: widgetbook/build/web
+      - name: Add 404.html for SPA routing
+        # Routes 404s to the correct sub-app (widgetbook root or /prototypes/).
+        # The target app's index.html reads __spa from sessionStorage and restores
+        # the original path via history.replaceState before Flutter initialises.
+        run: |
+          REPO="${{ github.event.repository.name }}"
+          cat > widgetbook/build/web/404.html << EOF
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting...</title>
+            <script>
+              (function () {
+                var l = window.location;
+                var base = '/${REPO}';
+                var path = l.pathname;
+                if (path.startsWith(base + '/prototypes/')) {
+                  sessionStorage['__spa'] = path + l.search;
+                  l.replace(base + '/prototypes/');
+                } else {
+                  sessionStorage['__spa'] = path + l.search;
+                  l.replace(base + '/');
+                }
+              })();
+            </script>
+          </head>
+          <body></body>
+          </html>
+          EOF
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: widgetbook/build/web
+          keep_files: true

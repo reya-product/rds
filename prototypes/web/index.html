@@ -34,6 +34,10 @@
   <link rel="manifest" href="manifest.json">
 
   <script>
+    // Restore deep-link path after GitHub Pages 404 redirect.
+    (function () { var r = sessionStorage['__spa']; if (r) { delete sessionStorage['__spa']; history.replaceState(null, null, r); } })();
+  </script>
+  <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>
