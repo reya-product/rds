@@ -539,7 +539,7 @@ class _MiddlePanel extends StatelessWidget {
 // _RightPanel
 // ---------------------------------------------------------------------------
 
-class _RightPanel extends StatelessWidget {
+class _RightPanel extends StatefulWidget {
   const _RightPanel({
     required this.selectedTab,
     required this.onTabChanged,
@@ -547,6 +547,13 @@ class _RightPanel extends StatelessWidget {
 
   final int selectedTab;
   final ValueChanged<int> onTabChanged;
+
+  @override
+  State<_RightPanel> createState() => _RightPanelState();
+}
+
+class _RightPanelState extends State<_RightPanel> {
+  int _formsSubTab = 0; // 0 = ASSIGNED, 1 = SUBMITTED
 
   static const _documents = [
     _DocumentData(name: 'Care Plan', count: '2'),
@@ -558,6 +565,16 @@ class _RightPanel extends StatelessWidget {
     _DocumentData(name: 'Discharge Summary'),
     _DocumentData(name: 'CT Scan'),
     _DocumentData(name: 'Ultrasound'),
+  ];
+
+  static const _submittedForms = [
+    _FormData(name: 'MD Pre-Visit Form', date: '26 Jun 2026'),
+    _FormData(name: 'Patient Suicide Severity Scale Questionnaire', date: '26 Jun 2026'),
+    _FormData(name: 'Exercise Pre-Visit Form', date: '25 Jun 2026'),
+    _FormData(name: 'MD Pre-Visit Form', date: '25 Jun 2026'),
+    _FormData(name: 'MSQ Questionnaire', date: '25 Jun 2026'),
+    _FormData(name: 'Diet ID Form', date: '25 Jun 2026'),
+    _FormData(name: 'Member Registration Form', date: '25 Jun 2026'),
   ];
 
   @override
@@ -574,41 +591,100 @@ class _RightPanel extends StatelessWidget {
             tabs: const [
               RdsTabItem(label: 'DOCUMENTS'),
               RdsTabItem(label: 'FORMS'),
+              RdsTabItem(label: 'ENCOUNTERS'),
+              RdsTabItem(label: 'CONSENTS'),
             ],
-            selectedIndex: selectedTab,
-            onChanged: onTabChanged,
+            selectedIndex: widget.selectedTab,
+            onChanged: widget.onTabChanged,
           ),
-          RdsSubHeader(
-            title: 'Documents Repository',
-            actionLabel: 'UPLOAD NEW',
-            onAction: () {},
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: rds.space3,
-              vertical: rds.space2,
+          if (widget.selectedTab == 0) ...[
+            RdsSubHeader(
+              title: 'Documents Repository',
+              actionLabel: 'UPLOAD NEW',
+              onAction: () {},
             ),
-            child: RdsSearchBar(
-              placeholder: 'Search documents…',
-              onChanged: (_) {},
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: _documents
-                    .map(
-                      (doc) => _DocumentItem(
-                        rds: rds,
-                        name: doc.name,
-                        count: doc.count,
-                      ),
-                    )
-                    .toList(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: rds.space3,
+                vertical: rds.space2,
+              ),
+              child: RdsSearchBar(
+                placeholder: 'Search documents…',
+                onChanged: (_) {},
               ),
             ),
-          ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: _documents
+                      .map(
+                        (doc) => _DocumentItem(
+                          rds: rds,
+                          name: doc.name,
+                          count: doc.count,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+          ] else if (widget.selectedTab == 1) ...[
+            RdsTabs(
+              tabs: const [
+                RdsTabItem(label: 'ASSIGNED'),
+                RdsTabItem(label: 'SUBMITTED'),
+              ],
+              selectedIndex: _formsSubTab,
+              onChanged: (i) => setState(() => _formsSubTab = i),
+            ),
+            if (_formsSubTab == 0) ...[
+              RdsSubHeader(
+                title: '0 Assigned',
+                actionLabel: 'ASSIGN TO MEMBER',
+                onAction: () {},
+              ),
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'No forms to be filled currently',
+                        style: rds.titleMedium.copyWith(color: rds.onSurface),
+                      ),
+                      SizedBox(height: rds.space1),
+                      Text(
+                        'All Assigned forms will appear here',
+                        style: rds.bodyMedium.copyWith(
+                          color: rds.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ] else ...[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: _submittedForms
+                        .map(
+                          (form) => _FormItem(
+                            rds: rds,
+                            name: form.name,
+                            date: form.date,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+            ],
+          ] else ...[
+            const Expanded(child: SizedBox()),
+          ],
         ],
       ),
     );
@@ -976,6 +1052,78 @@ class _DocumentData {
 
   final String name;
   final String? count;
+}
+
+// ---------------------------------------------------------------------------
+// _FormData  — simple value object for forms list
+// ---------------------------------------------------------------------------
+
+class _FormData {
+  const _FormData({required this.name, required this.date});
+
+  final String name;
+  final String date;
+}
+
+// ---------------------------------------------------------------------------
+// _FormItem  — single row in the submitted-forms list
+// ---------------------------------------------------------------------------
+
+class _FormItem extends StatefulWidget {
+  const _FormItem({required this.rds, required this.name, required this.date});
+
+  final RdsTheme rds;
+  final String name;
+  final String date;
+
+  @override
+  State<_FormItem> createState() => _FormItemState();
+}
+
+class _FormItemState extends State<_FormItem> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final rds = widget.rds;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          decoration: BoxDecoration(
+            color: _hovered
+                ? rds.onSurface.withOpacity(rds.stateHover)
+                : Colors.transparent,
+            border: Border(
+              bottom: BorderSide(color: rds.outlineVariant, width: 1),
+            ),
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: rds.space3,
+            vertical: rds.space3,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.name,
+                style: rds.bodyMedium.copyWith(color: rds.primary),
+              ),
+              SizedBox(height: rds.space1),
+              Text(
+                widget.date,
+                style: rds.bodySmall.copyWith(color: rds.onSurfaceVariant),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 // ---------------------------------------------------------------------------
