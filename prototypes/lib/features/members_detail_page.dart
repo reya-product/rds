@@ -272,6 +272,7 @@ class _LeftPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SizedBox(height: rds.space2),
           RdsContainerTabs(
             tabs: const [
               RdsTabItem(label: 'OVERVIEW'),
@@ -387,6 +388,7 @@ class _MiddlePanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SizedBox(height: rds.space2),
           RdsContainerTabs(
             tabs: const [
               RdsTabItem(label: '2 UPCOMING'),
@@ -493,6 +495,7 @@ class _RightPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SizedBox(height: rds.space2),
           RdsContainerTabs(
             tabs: const [
               RdsTabItem(label: 'DOCUMENTS'),

@@ -70,6 +70,7 @@ class RdsContainerTabs extends StatelessWidget {
                 return _ContainerTabItem(
                   item: tabs[i],
                   isSelected: i == selectedIndex,
+                  isLast: i == tabs.length - 1,
                   iconMode: iconMode,
                   rds: rds,
                   onTap: tabs[i].disabled ? null : () => onChanged(i),
@@ -91,6 +92,7 @@ class _ContainerTabItem extends StatefulWidget {
   const _ContainerTabItem({
     required this.item,
     required this.isSelected,
+    required this.isLast,
     required this.iconMode,
     required this.rds,
     required this.onTap,
@@ -98,6 +100,7 @@ class _ContainerTabItem extends StatefulWidget {
 
   final RdsTabItem item;
   final bool isSelected;
+  final bool isLast;
   final RdsTabIconMode iconMode;
   final RdsTheme rds;
   final VoidCallback? onTap;
@@ -130,7 +133,9 @@ class _ContainerTabItemState extends State<_ContainerTabItem> {
       fill = rds.surfaceContainer;
       textColor = rds.onSurfaceVariant.withOpacity(rds.opacityDisabled);
       height = 28;
-      borderRadius = BorderRadius.zero;
+      borderRadius = widget.isLast
+          ? BorderRadius.only(topRight: Radius.circular(rds.radiusMd))
+          : BorderRadius.zero;
     } else if (isSelected) {
       fill = rds.surface;
       textColor = rds.onSurface;
@@ -143,7 +148,9 @@ class _ContainerTabItemState extends State<_ContainerTabItem> {
       fill = rds.surfaceContainer;
       textColor = rds.onSurfaceVariant;
       height = 28;
-      borderRadius = BorderRadius.zero;
+      borderRadius = widget.isLast
+          ? BorderRadius.only(topRight: Radius.circular(rds.radiusMd))
+          : BorderRadius.zero;
     }
 
     double stateOpacity = 0.0;
