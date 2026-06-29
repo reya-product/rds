@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    (function () {
+      var l = window.location;
+      var base = '/rds';
+      var path = l.pathname;
+      if (path.startsWith(base + '/prototypes/')) {
+        sessionStorage['__spa'] = path + l.search;
+        l.replace(base + '/prototypes/');
+      } else {
+        sessionStorage['__spa'] = path + l.search;
+        l.replace(base + '/');
+      }
+    })();
+  </script>
+</head>
+<body></body>
+</html>
