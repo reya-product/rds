@@ -904,7 +904,6 @@ class _ColumnShell extends StatelessWidget {
       decoration: BoxDecoration(
         color: rds.surface,
         borderRadius: BorderRadius.circular(rds.radiusMd),
-        border: Border.all(color: rds.outlineVariant, width: 1),
       ),
       clipBehavior: Clip.antiAlias,
       child: child,
