@@ -8,12 +8,17 @@ import 'package:flutter/foundation.dart';
 // not cryptographic security. The prototype index is internal-only.
 // ---------------------------------------------------------------------------
 
+/// True when the app is built for the staging environment (--dart-define=STAGING=true).
+/// Staging skips the password gate — the URL itself is the access barrier.
+const bool kIsStaging = bool.fromEnvironment('STAGING', defaultValue: false);
+
 /// Change this to your desired index password.
 const String kIndexPassword = 'reya123456';
 
 /// Notifier for whether the current session has authenticated to the index.
 /// Listened to by the router so redirects update reactively.
-final authNotifier = ValueNotifier<bool>(false);
+/// Starts as `true` on staging so the gate is bypassed.
+final authNotifier = ValueNotifier<bool>(kIsStaging);
 
 /// Mark the session as authenticated.
 void signIn() => authNotifier.value = true;
