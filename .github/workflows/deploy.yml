@@ -61,7 +61,10 @@ jobs:
                 var l = window.location;
                 var base = '/${REPO}';
                 var path = l.pathname;
-                if (path.startsWith(base + '/prototypes/')) {
+                if (path.startsWith(base + '/prototypes-staging/')) {
+                  sessionStorage['__spa'] = path + l.search;
+                  l.replace(base + '/prototypes-staging/');
+                } else if (path.startsWith(base + '/prototypes/')) {
                   sessionStorage['__spa'] = path + l.search;
                   l.replace(base + '/prototypes/');
                 } else {
