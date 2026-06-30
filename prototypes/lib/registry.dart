@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import 'features/care_plan_page.dart';
 import 'features/members_detail_page.dart';
 
 // ---------------------------------------------------------------------------
@@ -62,6 +63,18 @@ class PrototypeRegistry {
           'Three-column member profile: contact info, upcoming appointments, and documents repository.',
       createdAt: DateTime(2026, 6, 23),
       builder: (ctx) => const MembersDetailPage(),
+    ),
+
+    // -----------------------------------------------------------------------
+    // Care Plan Document — 2026-06-30
+    // -----------------------------------------------------------------------
+    'care_plan_v1_3006': PrototypeEntry(
+      slug: 'care_plan_v1_3006',
+      name: 'Care Plan Document',
+      description:
+          'PDF-style care plan document showing patient info, vitals, chief complaint, and current supplements.',
+      createdAt: DateTime(2026, 6, 30),
+      builder: (ctx) => const CarePlanPage(),
     ),
 
     // -----------------------------------------------------------------------
